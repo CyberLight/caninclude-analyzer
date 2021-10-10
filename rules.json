@@ -1,0 +1,1805 @@
+{
+    "html": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "onlyOne": [
+                    "#the-head-element",
+                    "#the-body-element"
+                ]
+            }
+        }
+    },
+    "head": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "or": [
+                    { "zeroOrMore": "#metadata-content-2" },
+                    { "onlyOne": [
+                        "#the-title-element",
+                        "#the-base-element"
+                    ] }
+                ]
+            }
+        }
+    },
+    "title": {
+        "rules": {
+            "Categories": {
+                "default": "#metadata-content-2"
+            },
+            "ContentModel": {
+                "if": {
+                    "not": "#inter-element-whitespace",
+                    "then": "#text-content"
+                }
+            }
+        }
+    },
+    "base": {
+        "rules": {
+            "Categories": {
+                "default": "#metadata-content-2"
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "link": {
+        "rules": {
+            "Categories": {
+                "default": "#metadata-content-2",
+                "if": {
+                    "is": "#allowed-in-the-body",
+                    "then": [
+                        "#flow-content-2",
+                        "#phrasing-content-2"
+                    ]
+                }
+            },
+            "ContentModel": {
+            }
+        }
+    },
+    "meta": {
+        "rules": {
+            "Categories": {
+                "default": "#metadata-content-2",
+                "if": {
+                    "is": "#names:-the-itemprop-attribute",
+                    "then": [
+                        "#flow-content-2",
+                        "#phrasing-content-2"
+                    ]
+                }
+            },
+            "ContentModel": {}
+        }
+    },
+    "style": {
+        "rules": {
+            "Categories": {
+                "default": "#metadata-content-2"
+            },
+            "ContentModel": {
+                "default": "#text-content"
+            }
+        }
+    },
+    "body": {
+        "rules": {
+            "Categories": {
+                "default": "#sectioning-root"
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "article": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#sectioning-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "section": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#sectioning-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "nav": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#sectioning-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "aside": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#sectioning-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+               "default": "#flow-content-2"
+            }
+        }
+    },
+    "h1": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "h2": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "h3": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "h4": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "h5": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "h6": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "hgroup": {
+        "rules": {
+            "Categories": {
+                "any": [
+                    "#flow-content-2",
+                    "#heading-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "oneOrMore": [
+                    "#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements"
+                ],
+                "optional": "#script-supporting-elements-2"
+            }
+        }
+    },
+    "header": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo": [
+                    "#the-header-element",
+                    "#the-footer-element"
+                ]
+            }
+        }
+    },
+    "footer": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo": [
+                    "#the-header-element",
+                    "#the-footer-element"
+                ]
+            }
+        }
+    },
+    "address": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo": [
+                    "#heading-content-2",
+                    "#sectioning-content-2",
+                    "#the-header-element",
+                    "#the-footer-element",
+                    "#the-address-element"
+                ]
+            }
+        }
+    },
+    "p": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "hr": {
+        "rules": {
+            "Categories": {
+                "default": "#flow-content-2"
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "pre": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2", 
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "blockquote": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#sectioning-root",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "ol": {
+        "rules": {
+            "Categories": {
+                "default": "#flow-content-2",
+                "if": {
+                    "hasOne": "#the-li-element",
+                    "then": "#palpable-content-2"
+                }
+            },
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-li-element", 
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "ul": {
+        "rules": {
+            "Categories": {
+                "default": "#flow-content-2",
+                "if": {
+                    "hasOne": "#the-li-element",
+                    "then": "#palpable-content-2"
+                }
+            },
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-li-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "menu": {
+        "rules": {
+            "Categories": {
+                "default": "#flow-content-2",
+                "if": {
+                    "hasOne": "#the-li-element",
+                    "then": "#palpable-content-2"
+                }
+            },
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-li-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "li": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "dl": {
+        "rules": {
+            "Categories": {
+                "default": "#flow-content-2",
+                "if":{
+                    "hasOne": [
+                        "#the-dt-element",
+                        "#the-dd-element"
+                    ],
+                    "then": "#palpable-content-2"
+                }
+            },
+            "ContentModel": {
+                "or": [
+                    {
+                        "oneOrMore": [
+                            "#the-div-element"
+                        ]
+                    },
+                    {
+                        "oneOrMore": [
+                            "#the-dt-element",
+                            "#the-dd-element"
+                        ]
+                    }
+                ],
+                "optional": "#script-supporting-elements-2"
+            }
+        }
+    },
+    "dt": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo": [
+                    "#the-header-element",
+                    "#the-footer-element",
+                    "#sectioning-content-2",
+                    "#heading-content-2"
+                ]
+            }
+        }
+    },
+    "dd": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "figure": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#sectioning-root",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "onlyOne": "#the-figcaption-element"
+            }
+        }
+    },
+    "figcaption": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "main": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "div": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "if": {
+                    "childOf": "#the-dl-element",
+                    "then": [
+                        "#the-dt-element", 
+                        "#the-dd-element"
+                    ],
+                    "else": "#flow-content-2"
+                }
+            }
+        }
+    },
+    "a": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ],
+                "if": {
+                    "has": "#attr-hyperlink-href",
+                    "then": "#interactive-content-2"
+                }
+            },
+            "ContentModel": {
+                "default": "#transparent",
+                "butNo": [
+                    "#interactive-content-2",
+                    "#the-a-element",
+                    "#attr-tabindex"
+                ]
+            }
+        }
+    },
+    "em": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "strong": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "small": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "s": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "cite": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "q": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "dfn": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2",
+                "butNo": "#the-dfn-element"
+            }
+        }
+    },
+    "abbr": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "ruby": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "or": [
+                    {
+                        "default": "#phrasing-content-2",
+                        "butNo": "#the-ruby-element"
+                    },
+                    { 
+                        "oneOrMore": [
+                            "#the-rp-element",
+                            "#the-rt-element"
+                        ]
+                    },
+                    {
+                        "onlyOne": "#the-ruby-element",
+                        "noChild": "#the-ruby-element"
+                    }  
+                ]
+            }
+        }
+    },
+    "rt": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "rp": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#text-content"
+            }
+        }
+    },
+    "data": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "time": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#text-content",
+                "format": "matter",
+                "if": {
+                    "has": "#attr-time-datetime",
+                    "then": "#phrasing-content-2"
+                }
+            }
+        }
+    },
+    "code": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "var": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "samp": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "kbd": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "sub": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "sup": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "i": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "b": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "u": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "mark": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "bdi": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "bdo": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "span": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "br": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "wbr": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "ins": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#transparent"
+            }
+        }
+    },
+    "del": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#transparent"
+            }
+        }
+    },
+    "picture": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category"
+                ]
+            },
+            "ContentModel": {
+                "zeroOrMore":[
+                    "#the-source-element",
+                    "#the-img-element"
+                ],
+                "optional": "#script-supporting-elements-2"
+            }
+        }
+    },
+    "source": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "img": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ],
+                "if": { 
+                    "has": "#attr-hyperlink-usemap",
+                    "then": "#interactive-content-2"
+                }
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "iframe": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#interactive-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "embed": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#interactive-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "object": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#category-listed",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "if": {
+                    "zeroOrMore": "#the-param-element",
+                    "then": "#transparent"
+                }
+            }
+        }
+    },
+    "param": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "video": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#palpable-content-2"
+                ],
+                "if": {
+                    "has": "#attr-media-controls",
+                    "then": "#interactive-content-2"
+                }
+            },
+            "ContentModel": {
+                "if": {
+                    "and": [
+                        { "has": "#attr-media-src" },
+                        { "zeroOrMore": "#the-track-element" },
+                        { "noChild": "#media-element" }
+                    ],
+                    "then": "#transparent"
+                },
+                "elseif": {
+                    "and": [
+                        {
+                            "notHas": "#attr-media-src"
+                        },
+                        {
+                            "zeroOrMore": "#the-source-element"
+                        },
+                        {
+                            "zeroOrMore": "#the-track-element"
+                        },
+                        {
+                            "noChild": "#media-element"
+                        }
+                    ],
+                    "then": "#transparent"
+                }
+            }
+        }
+    },
+    "audio": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category"
+                ],
+                "if": {
+                    "has": "#attr-media-controls",
+                    "then": [
+                        "#interactive-content-2", 
+                        "#palpable-content-2"
+                    ]
+                }
+            },
+            "ContentModel": {
+                "if": {
+                    "and": [
+                        { "has": "#attr-media-src" },
+                        { "zeroOrMore": "#the-track-element" },
+                        { "noChild": "#media-element" }
+                    ],
+                    "then": "#transparent"
+                },
+                "elseif": {
+                    "and": [
+                        {
+                            "notHas": "#attr-media-src"
+                        },
+                        {
+                            "zeroOrMore": "#the-source-element"
+                        },
+                        {
+                            "zeroOrMore": "#the-track-element"
+                        },
+                        {
+                            "noChild": "#media-element"
+                        }
+                    ],
+                    "then": "#transparent"
+                }
+            }
+        }
+    },
+    "track": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "map": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#transparent"
+            }
+        }
+    },
+    "area": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "table": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "or": [
+                    { 
+                        "group": 
+                        [
+                            { "optional": "#the-caption-element" },
+                            { "zeroOrMore":  "#the-colgroup-element" }
+                        ]
+                    },
+                    {
+                        "group": [
+                            {
+                                "optional": "#the-thead-element"
+                            },
+                            {
+                                "zeroOrMore": "#the-tbody-element"
+                            }
+                        ]
+                    },
+                    {
+                        "group": [
+                            { "oneOrMore":  "#the-tr-element" },
+                            { "optional": "#the-tfoot-element" },
+                            { "zeroOrMore": "#script-supporting-elements-2" }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "caption": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "noChild": "#the-table-element"
+            }
+        }
+    },
+    "colgroup": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "if": {
+                    "has": "#attr-colgroup-span",
+                    "then": "#concept-content-nothing"
+                },
+                "elseif": {
+                    "notHas": "#attr-colgroup-span",
+                    "then": {
+                        "zeroOrMore": [
+                            "#the-col-element", 
+                            "#the-template-element"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "col": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "tbody": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-tr-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "thead": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-tr-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "tfoot": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-tr-element",
+                    "#script-supporting-elements-2"
+                ]                
+            }
+        }
+    },
+    "tr": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-td-element",
+                    "#the-th-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "td": {
+        "rules": {
+            "Categories": {
+                "default": "#sectioning-root"
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "th": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo":[
+                    "#the-header-element",
+                    "#the-footer-element",
+                    "#sectioning-content-2",
+                    "#heading-content-2"
+                ]
+            }
+        }
+    },
+    "form": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2",
+                "butNo": "#the-form-element"
+            }
+        }
+    },
+    "label": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#interactive-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": [
+                    "#phrasing-content-2", 
+                    "#labeled-control"
+                ],
+                "butNo": [
+                    "#category-label",
+                    "#the-label-element"
+                ]
+            }
+        }
+    },
+    "input": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ],
+                "if": {
+                    "and": [
+                        { "not": "#hidden-state-(type=hidden)" },
+                        { "has": "#attr-input-type" }
+                    ],
+                    "then": [
+                        "#interactive-content-2",
+                        "#category-listed",
+                        "#category-label",
+                        "#category-submit",
+                        "#category-reset",
+                        "#category-autocapitalize",
+                        "#form-associated-element",
+                        "#palpable-content-2"
+                    ],
+                    "elseif": {
+                        "has": [
+                            "#attr-input-type",
+                            "#hidden-state-(type=hidden)"
+                        ],
+                        "then": [
+                            "#category-listed",
+                            "#category-submit",
+                            "#category-reset",
+                            "#category-autocapitalize",
+                            "#form-associated-element"
+                        ]
+                    }
+                }
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing"
+            }
+        }
+    },
+    "button": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#interactive-content-2",
+                    "#category-listed",
+                    "#category-label",
+                    "#category-submit",
+                    "#category-autocapitalize",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2",
+                "butNo":[
+                    "#interactive-content-2",
+                    "#attr-tabindex"
+                ]
+            }
+        }
+    },
+    "select": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#interactive-content-2",
+                    "#category-listed",
+                    "#category-label",
+                    "#category-submit",
+                    "#category-reset",
+                    "#category-autocapitalize",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-option-element",
+                    "#the-optgroup-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "datalist": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "or": [
+                    { "has": "phrasing content" },
+                    { "zeroOrMore": [ "#the-option-element", "#script-supporting-elements-2" ] }
+                ]
+            }
+        }
+    },
+    "optgroup": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "zeroOrMore": [
+                    "#the-option-element",
+                    "#script-supporting-elements-2"
+                ]
+            }
+        }
+    },
+    "option": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "if0": {
+                    "and": [
+                        "#attr-option-label",
+                        "#attr-option-value"
+                    ],
+                    "then": [
+                        "#concept-content-nothing",
+                        "#text-content"
+                    ],
+                    "elseif": {
+                        "and": [
+                            {
+                                "hasNo": "#attr-option-label"
+                            },
+                            {
+                                "notChildOf": "#the-datalist-element"
+                            }
+                        ],
+                        "then": "#text-content",
+                        "andThen": {
+                            "isNot": "#inter-element-whitespace"
+                        }
+                    }
+                },
+                "if1": {
+                    "and": [
+                        { "hasNo": "#attr-option-label" },
+                        { "isChildOf": "#the-datalist-element" }
+                    ],
+                    "then": "#text-content"
+                }
+            }
+        }
+    },
+    "textarea": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#interactive-content-2",
+                    "#category-listed",
+                    "#category-label",
+                    "#category-submit",
+                    "#category-reset",
+                    "#category-autocapitalize",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#text-content"
+            }
+        }
+    },
+    "output": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#category-listed",
+                    "#category-label",
+                    "#category-reset",
+                    "#category-autocapitalize",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2"
+            }
+        }
+    },
+    "progress": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#category-label",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2",
+                "butNo": "#the-progress-element"
+            }
+        }
+    },
+    "meter": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#category-label",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#phrasing-content-2",
+                "butNo": "#the-meter-element"
+            }
+        }
+    },
+    "fieldset": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#sectioning-root",
+                    "#category-listed",
+                    "#category-autocapitalize",
+                    "#form-associated-element",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "group": [
+                    { "optional": "#the-legend-element" }, 
+                    { "zeroOrMore": "#flow-content-2" }
+                ] 
+            }
+        }
+    },
+    "legend": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": [
+                    "#phrasing-content-2",
+                    "#heading-content-2"
+                ]
+            }
+        }
+    },
+    "details": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#sectioning-root",
+                    "#interactive-content-2",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "group": [
+                    { "one": "#the-summary-element" },
+                    { "zeroOrMore": "#flow-content-2" }
+                ]
+            }
+        }
+    },
+    "dialog": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#sectioning-root"
+                ]
+            },
+            "ContentModel": {
+                "default": "#flow-content-2"
+            }
+        }
+    },
+    "script": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#metadata-content-2",
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#script-supporting-elements-2"
+                ]
+            },
+            "ContentModel": {
+                "if": {
+                    "and": [
+                        { "hasNo": "#attr-script-src" },
+                        { "dependsOn": "#attr-script-type" }
+                    ],
+                    "then": {
+                        "mustMatch": "#restrictions-for-contents-of-script-elements"
+                    },
+                    "else": {
+                        "containOnly": "#inline-documentation-for-external-scripts",
+                        "mustMatch": "#restrictions-for-contents-of-script-elements"
+                    }
+                }
+            }
+        }
+    },
+    "noscript": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#metadata-content-2",
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "if": {
+                    "and": [
+                        { "is": "#concept-n-noscript" },
+                        { "isChildOf": "#the-head-element" }
+                    ],
+                    "then": {
+                        "zeroOrMore": [
+                            "#the-link-element",
+                            "#the-style-element",
+                            "#the-meta-element"
+                        ]
+                    },
+                    "elseif": {
+                        "notIsChildOf": "#the-head-element",
+                        "then": {
+                            "default": "#transparent",
+                            "butNo": "#the-noscript-element"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "template": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#metadata-content-2",
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#script-supporting-elements-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#concept-content-nothing",
+                "forClarification": "#template-example"
+            }
+        }
+    },
+    "slot": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#transparent"
+            }
+        }
+    },
+    "canvas": {
+        "rules": {
+            "Categories": {
+                "default": [
+                    "#flow-content-2",
+                    "#phrasing-content-2",
+                    "#embedded-content-category",
+                    "#palpable-content-2"
+                ]
+            },
+            "ContentModel": {
+                "default": "#transparent",
+                "but": {
+                    "not": "#interactive-content-2",
+                    "except": [
+                        "#the-a-element", 
+                        "#the-img-element", 
+                        "#attr-hyperlink-usemap", 
+                        "#the-button-element", 
+                        "#the-input-element",
+                        { "or": [
+                            { "has": "#attr-input-type", "in": "#checkbox-state-(type=checkbox)" },
+                            { "has": "#radio-button-state-(type=radio)" }
+                        ]},
+                        { "if": "#the-input-element", "is": "#concept-button" },
+                        { "or": [
+                            {
+                                "if": "#the-select-element",
+                                "withA": "#attr-select-multiple"
+                            },
+                            {
+                                "oneOrMore": "#concept-select-size"
+                            }
+                        ]}    
+                    ]
+                }
+            }
+        }
+    }
+}
