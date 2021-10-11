@@ -53,6 +53,11 @@ class TagAnalyzer {
         return this.ifthen(o.then);
       }
     }
+    if (o.hasOne) {
+      if (o.hasOne === text) {
+        return this.ifthen(o.then);
+      }
+    }
     if (o.not) {
       if (this.not(o, text)) {
         if (o.then) return this.ifthen(o.then);
