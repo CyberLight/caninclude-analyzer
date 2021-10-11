@@ -254,4 +254,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                          | expected
+        ${'#the-li-element'}               | ${true}
+        ${'#script-supporting-elements-2'} | ${true}
+        ${'#other-content'}                | ${false}
+    `('Can include $parameter to "ol" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.ol;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
