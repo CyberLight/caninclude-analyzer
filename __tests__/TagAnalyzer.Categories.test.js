@@ -5,7 +5,7 @@ describe('TagAnalyzer::Categories', () => {
         parameter                      | expected
         ${undefined}                   | ${['#metadata-content-2']}
         ${'#allowed-in-the-body'}      | ${['#flow-content-2', '#phrasing-content-2', '#metadata-content-2']}
-    `('Can include $parameter to "link" tag result: $expected', ({parameter, expected}) => {
+    `('Get categoties by $parameter for "link" tag result: $expected', ({parameter, expected}) => {
     const tag = {
       'rules': {
         'Categories': {
@@ -19,6 +19,51 @@ describe('TagAnalyzer::Categories', () => {
           },
         },
         'ContentModel': {
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                                | expected
+        ${undefined}                             | ${['#metadata-content-2']}
+        ${'#names:-the-itemprop-attribute'}      | ${['#flow-content-2', '#phrasing-content-2', '#metadata-content-2']}
+    `('Get categoties by $parameter for "link" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+          'if': {
+            'is': '#names:-the-itemprop-attribute',
+            'then': [
+              '#flow-content-2',
+              '#phrasing-content-2',
+            ],
+          },
+        },
+        'ContentModel': {},
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#metadata-content-2']}
+        ${'#the-a-element'}  | ${['#metadata-content-2']}
+    `('Get categoties by $parameter for "style" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+        },
+        'ContentModel': {
+          'default': '#text-content',
         },
       },
     };
