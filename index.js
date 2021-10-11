@@ -48,13 +48,21 @@ class TagAnalyzer {
       return [];
     }
 
+    defaultCond(o) {
+        if (Array.isArray(o)) {
+            return o;
+        }
+        return [o];
+    }
+
     canIncludeParam(text) {
         const { ContentModel } = this.tagMetadata.rules;
         const { 
             onlyOne, 
             zeroOrMore,
             or,
-            if: ifCond
+            if: ifCond,
+            default: defaultCond,
         } = ContentModel;
 
         if (onlyOne) {
@@ -66,8 +74,13 @@ class TagAnalyzer {
         if (or) {
             return new Set(this.or(or)).has(text);
         }
+
         if (ifCond) {
             return new Set(this.ifCond(ifCond, text)).has(text);
+        }
+
+        if (defaultCond) {
+            return new Set(this.defaultCond(defaultCond)).has(text)
         }
     }
 }

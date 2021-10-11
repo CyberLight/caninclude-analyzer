@@ -72,4 +72,24 @@ describe('TagAnalyzer::ContentModel', () => {
         const analyzer = new TagAnalyzer(tag);
         expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
     }); 
+
+    it.each`
+        parameter                      | expected
+        ${'#concept-content-nothing'}  | ${true}
+        ${'#inter-body-element'}       | ${false}
+    `('Can include $parameter to "base" tag result: $expected', ({ parameter, expected }) => {
+        const tag = {
+            "rules": {
+                "Categories": {
+                    "default": "#metadata-content-2"
+                },
+                "ContentModel": {
+                    "default": "#concept-content-nothing"
+                }
+            }
+        };
+
+        const analyzer = new TagAnalyzer(tag);
+        expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+    }); 
 });
