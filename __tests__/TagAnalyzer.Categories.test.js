@@ -228,15 +228,18 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['ol', 'ul', 'menu'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter            | expected
         ${undefined}         | ${['#flow-content-2']}
         ${'#other-content'}  | ${['#flow-content-2']}
         ${'#the-li-element'} | ${['#palpable-content-2', '#flow-content-2']}
-    `('Get categoties by $parameter for "ol" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.ol;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 });

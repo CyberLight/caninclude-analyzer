@@ -255,15 +255,18 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['ol', 'ul', 'menu'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter                          | expected
         ${'#the-li-element'}               | ${true}
         ${'#script-supporting-elements-2'} | ${true}
         ${'#other-content'}                | ${false}
-    `('Can include $parameter to "ol" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.ol;
+    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });
