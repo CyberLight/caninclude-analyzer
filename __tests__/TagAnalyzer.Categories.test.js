@@ -3,6 +3,94 @@ const {TagAnalyzer} = require('../index.js');
 describe('TagAnalyzer::Categories', () => {
   it.each`
         parameter                      | expected
+        ${undefined}                   | ${[]}
+        ${'#allowed-in-the-body'}      | ${[]}
+    `('Get categoties by $parameter for "html" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {},
+        'ContentModel': {
+          'onlyOne': [
+            '#the-head-element',
+            '#the-body-element',
+          ],
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                      | expected
+        ${undefined}                   | ${[]}
+        ${'#allowed-in-the-body'}      | ${[]}
+    `('Get categoties by $parameter for "head" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {},
+        'ContentModel': {
+          'or': [
+            {'zeroOrMore': '#metadata-content-2'},
+            {'onlyOne': [
+              '#the-title-element',
+              '#the-base-element',
+            ]},
+          ],
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter           | expected
+        ${undefined}        | ${['#metadata-content-2']}
+        ${'#any-option'}    | ${['#metadata-content-2']}
+    `('Get categoties by $parameter for "title" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+        },
+        'ContentModel': {
+          'if': {
+            'not': '#inter-element-whitespace',
+            'then': '#text-content',
+          },
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.only.each`
+        parameter           | expected
+        ${undefined}        | ${['#metadata-content-2']}
+        ${'#any-option'}    | ${['#metadata-content-2']}
+    `('Get categoties by $parameter for "base" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+        },
+        'ContentModel': {
+          'default': '#concept-content-nothing',
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                      | expected
         ${undefined}                   | ${['#metadata-content-2']}
         ${'#allowed-in-the-body'}      | ${['#flow-content-2', '#phrasing-content-2', '#metadata-content-2']}
     `('Get categoties by $parameter for "link" tag result: $expected', ({parameter, expected}) => {
@@ -31,7 +119,7 @@ describe('TagAnalyzer::Categories', () => {
         parameter                                | expected
         ${undefined}                             | ${['#metadata-content-2']}
         ${'#names:-the-itemprop-attribute'}      | ${['#flow-content-2', '#phrasing-content-2', '#metadata-content-2']}
-    `('Get categoties by $parameter for "link" tag result: $expected', ({parameter, expected}) => {
+    `('Get categoties by $parameter for "meta" tag result: $expected', ({parameter, expected}) => {
     const tag = {
       'rules': {
         'Categories': {
