@@ -159,4 +159,24 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#sectioning-root']}
+        ${'#other-content'}  | ${['#sectioning-root']}
+    `('Get categoties by $parameter for "body" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#sectioning-root',
+        },
+        'ContentModel': {
+          'default': '#flow-content-2',
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
