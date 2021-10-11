@@ -27,6 +27,15 @@ class TagAnalyzer {
     });
   }
 
+  and(arr) {
+    return arr.flatMap((item) => {
+      if (item.oneOrMore) return this.oneOrMore(item.oneOrMore);
+      if (item.optional) return this.optional(item.optional);
+      if (item.zeroOrMore) return this.zeroOrMore(item.zeroOrMore);
+      if (item.onlyOne) return this.onlyOne(item.onlyOne);
+    });
+  }
+
   not(o, text) {
     return o !== text;
   }
@@ -68,6 +77,20 @@ class TagAnalyzer {
     return [o];
   }
 
+  oneOrMore(o) {
+    if (Array.isArray(o)) {
+      return o;
+    }
+    return [o];
+  }
+
+  optional(o) {
+    if (Array.isArray(o)) {
+      return o;
+    }
+    return [o];
+  }
+
   getCategories(text) {
     const {Categories} = this.tagMetadata.rules;
     const {
@@ -100,6 +123,8 @@ class TagAnalyzer {
       or,
       if: ifCond,
       default: defaultCond,
+      oneOrMore,
+      and,
     } = ContentModel;
 
     if (onlyOne) {
@@ -114,12 +139,20 @@ class TagAnalyzer {
       return new Set(this.or(or)).has(text);
     }
 
+    if (and) {
+      return new Set(this.and(and)).has(text);
+    }
+
     if (ifCond) {
       return new Set(this.ifCond(ifCond, text)).has(text);
     }
 
     if (defaultCond) {
       return new Set(this.defaultCond(defaultCond)).has(text);
+    }
+
+    if (oneOrMore) {
+      return new Set(this.oneOrMore(oneOrMore)).has(text);
     }
 
     return false;
