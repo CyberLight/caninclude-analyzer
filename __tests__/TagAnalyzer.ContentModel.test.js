@@ -260,4 +260,29 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter              | expected
+        ${'#flow-content-2'}   | ${true}
+        ${undefined}           | ${false}
+        ${'#other-content'}    | ${false}
+    `('Can include $parameter to "aside" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'any': [
+            '#flow-content-2',
+            '#sectioning-content-2',
+            '#palpable-content-2',
+          ],
+        },
+        'ContentModel': {
+          'default': '#flow-content-2',
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
