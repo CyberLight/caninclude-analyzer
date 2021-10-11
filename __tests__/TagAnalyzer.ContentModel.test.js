@@ -232,4 +232,15 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                     | expected
+        ${'#phrasing-content-2'}      | ${true}
+        ${'#other-content'}           | ${false}
+    `('Can include $parameter to "pre" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.pre;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
