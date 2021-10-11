@@ -243,4 +243,15 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                     | expected
+        ${'#flow-content-2'}          | ${true}
+        ${'#other-content'}           | ${false}
+    `('Can include $parameter to "blockquote" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.blockquote;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
