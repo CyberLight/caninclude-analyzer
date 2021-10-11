@@ -221,4 +221,15 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                     | expected
+        ${'#concept-content-nothing'} | ${true}
+        ${'#other-content'}           | ${false}
+    `('Can include $parameter to "hr" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.hr;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
