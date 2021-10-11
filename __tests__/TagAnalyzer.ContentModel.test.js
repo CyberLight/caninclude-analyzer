@@ -194,4 +194,19 @@ describe('TagAnalyzer::ContentModel', () => {
           expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                  | expected
+        ${'#flow-content-2'}       | ${true}
+        ${'#heading-content-2'}    | ${false}
+        ${'#sectioning-content-2'} | ${false}
+        ${'#the-header-element'}   | ${false}
+        ${'#the-footer-element'}   | ${false}
+        ${'#the-address-element'}  | ${false}
+    `('Can include $parameter to "address" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.address;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
