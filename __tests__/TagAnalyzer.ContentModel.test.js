@@ -313,4 +313,47 @@ describe('TagAnalyzer::ContentModel', () => {
           expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                                      | expected
+        ${'#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements'}  | ${true}
+        ${'#script-supporting-elements-2'}             | ${true}
+        ${'#the-h1-element'}                           | ${true}
+        ${'#the-h2-element'}                           | ${true}
+        ${'#the-h3-element'}                           | ${true}
+        ${'#the-h4-element'}                           | ${true}
+        ${'#the-h5-element'}                           | ${true}
+        ${'#the-h6-element'}                           | ${true}
+        ${undefined}                                   | ${false}
+        ${'#other-content'}                            | ${false}
+    `('Can include $parameter to "hgroup" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'any': [
+            '#flow-content-2',
+            '#heading-content-2',
+            '#palpable-content-2',
+          ],
+        },
+        'ContentModel': {
+          'and': [
+            {'oneOrMore': [
+              '#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements',
+              '#the-h1-element',
+              '#the-h2-element',
+              '#the-h3-element',
+              '#the-h4-element',
+              '#the-h5-element',
+              '#the-h6-element',
+            ]},
+            {'optional': '#script-supporting-elements-2'},
+          ],
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
