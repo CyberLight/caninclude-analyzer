@@ -92,4 +92,30 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter          | expected
+        ${'#any-content'}  | ${false}
+        ${undefined}       | ${false}
+    `('Can include $parameter to "link" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+          'if': {
+            'is': '#allowed-in-the-body',
+            'then': [
+              '#flow-content-2',
+              '#phrasing-content-2',
+            ],
+          },
+        },
+        'ContentModel': {
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
