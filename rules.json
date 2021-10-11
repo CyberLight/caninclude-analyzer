@@ -248,10 +248,18 @@
                 ]
             },
             "ContentModel": {
-                "oneOrMore": [
-                    "#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements"
-                ],
-                "optional": "#script-supporting-elements-2"
+              "and": [
+                { "oneOrMore": [
+                    "#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements",
+                    "#the-h1-element",
+                    "#the-h2-element",
+                    "#the-h3-element",
+                    "#the-h4-element",
+                    "#the-h5-element",
+                    "#the-h6-element"
+                  ] },
+                { "optional": "#script-supporting-elements-2" }
+              ]
             }
         }
     },
@@ -336,7 +344,7 @@
         "rules": {
             "Categories": {
                 "default": [
-                    "#flow-content-2", 
+                    "#flow-content-2",
                     "#palpable-content-2"
                 ]
             },
@@ -370,7 +378,7 @@
             },
             "ContentModel": {
                 "zeroOrMore": [
-                    "#the-li-element", 
+                    "#the-li-element",
                     "#script-supporting-elements-2"
                 ]
             }
@@ -518,7 +526,7 @@
                 "if": {
                     "childOf": "#the-dl-element",
                     "then": [
-                        "#the-dt-element", 
+                        "#the-dt-element",
                         "#the-dd-element"
                     ],
                     "else": "#flow-content-2"
@@ -677,7 +685,7 @@
                         "default": "#phrasing-content-2",
                         "butNo": "#the-ruby-element"
                     },
-                    { 
+                    {
                         "oneOrMore": [
                             "#the-rp-element",
                             "#the-rt-element"
@@ -686,7 +694,7 @@
                     {
                         "onlyOne": "#the-ruby-element",
                         "noChild": "#the-ruby-element"
-                    }  
+                    }
                 ]
             }
         }
@@ -1011,7 +1019,7 @@
                     "#form-associated-element",
                     "#palpable-content-2"
                 ],
-                "if": { 
+                "if": {
                     "has": "#attr-hyperlink-usemap",
                     "then": "#interactive-content-2"
                 }
@@ -1135,7 +1143,7 @@
                 "if": {
                     "has": "#attr-media-controls",
                     "then": [
-                        "#interactive-content-2", 
+                        "#interactive-content-2",
                         "#palpable-content-2"
                     ]
                 }
@@ -1214,8 +1222,8 @@
             },
             "ContentModel": {
                 "or": [
-                    { 
-                        "group": 
+                    {
+                        "group":
                         [
                             { "optional": "#the-caption-element" },
                             { "zeroOrMore":  "#the-colgroup-element" }
@@ -1263,7 +1271,7 @@
                     "notHas": "#attr-colgroup-span",
                     "then": {
                         "zeroOrMore": [
-                            "#the-col-element", 
+                            "#the-col-element",
                             "#the-template-element"
                         ]
                     }
@@ -1308,7 +1316,7 @@
                 "zeroOrMore": [
                     "#the-tr-element",
                     "#script-supporting-elements-2"
-                ]                
+                ]
             }
         }
     },
@@ -1374,7 +1382,7 @@
             },
             "ContentModel": {
                 "default": [
-                    "#phrasing-content-2", 
+                    "#phrasing-content-2",
                     "#labeled-control"
                 ],
                 "butNo": [
@@ -1626,9 +1634,9 @@
             },
             "ContentModel": {
                 "group": [
-                    { "optional": "#the-legend-element" }, 
+                    { "optional": "#the-legend-element" },
                     { "zeroOrMore": "#flow-content-2" }
-                ] 
+                ]
             }
         }
     },
@@ -1778,10 +1786,10 @@
                 "but": {
                     "not": "#interactive-content-2",
                     "except": [
-                        "#the-a-element", 
-                        "#the-img-element", 
-                        "#attr-hyperlink-usemap", 
-                        "#the-button-element", 
+                        "#the-a-element",
+                        "#the-img-element",
+                        "#attr-hyperlink-usemap",
+                        "#the-button-element",
                         "#the-input-element",
                         { "or": [
                             { "has": "#attr-input-type", "in": "#checkbox-state-(type=checkbox)" },
@@ -1796,7 +1804,7 @@
                             {
                                 "oneOrMore": "#concept-select-size"
                             }
-                        ]}    
+                        ]}
                     ]
                 }
             }
