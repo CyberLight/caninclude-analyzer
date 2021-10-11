@@ -61,9 +61,17 @@ class TagAnalyzer {
     return [o];
   }
 
+  any(o) {
+    if (Array.isArray(o)) {
+      return o;
+    }
+    return [o];
+  }
+
   getCategories(text) {
     const {Categories} = this.tagMetadata.rules;
     const {
+      any,
       if: ifCond,
       default: defaultCond,
     } = Categories;
@@ -75,6 +83,10 @@ class TagAnalyzer {
 
     if (defaultCond) {
       tagCategories = tagCategories.concat(this.defaultCond(defaultCond));
+    }
+
+    if (any) {
+      tagCategories = tagCategories.concat(this.any(any));
     }
 
     return [...new Set(tagCategories)];
