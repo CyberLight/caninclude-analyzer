@@ -143,4 +143,25 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter           | expected
+        ${'#text-content'}  | ${true}
+        ${undefined}        | ${false}
+        ${'#other-content'} | ${false}
+    `('Can include $parameter to "style" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+        },
+        'ContentModel': {
+          'default': '#text-content',
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
