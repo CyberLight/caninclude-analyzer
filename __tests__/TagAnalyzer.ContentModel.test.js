@@ -118,4 +118,29 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter          | expected
+        ${'#any-content'}  | ${false}
+        ${undefined}       | ${false}
+    `('Can include $parameter to "meta" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': '#metadata-content-2',
+          'if': {
+            'is': '#names:-the-itemprop-attribute',
+            'then': [
+              '#flow-content-2',
+              '#phrasing-content-2',
+            ],
+          },
+        },
+        'ContentModel': {},
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
