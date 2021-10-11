@@ -69,7 +69,7 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.only.each`
+  it.each`
         parameter           | expected
         ${undefined}        | ${['#metadata-content-2']}
         ${'#any-option'}    | ${['#metadata-content-2']}
