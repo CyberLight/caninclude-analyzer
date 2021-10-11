@@ -356,4 +356,34 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                | expected
+        ${'#flow-content-2'}     | ${true}
+        ${undefined}             | ${false}
+        ${'#the-header-element'} | ${false}
+        ${'#the-footer-element'} | ${false}
+        ${'#other-content'}      | ${false}
+    `('Can include $parameter to "header" tag result: $expected', ({parameter, expected}) => {
+    const tag = {
+      'rules': {
+        'Categories': {
+          'default': [
+            '#flow-content-2',
+            '#palpable-content-2',
+          ],
+        },
+        'ContentModel': {
+          'default': '#flow-content-2',
+          'butNo': [
+            '#the-header-element',
+            '#the-footer-element',
+          ],
+        },
+      },
+    };
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
