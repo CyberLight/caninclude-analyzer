@@ -285,4 +285,32 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  describe.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])(
+      'For tag=%s', (tag) => {
+        it.each`
+          parameter                 | expected
+          ${'#phrasing-content-2'}  | ${true}
+          ${undefined}              | ${false}
+          ${'#flow-content-2'}      | ${false}
+        `(`Can include $parameter to "${tag}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = {
+            'rules': {
+              'Categories': {
+                'any': [
+                  '#flow-content-2',
+                  '#heading-content-2',
+                  '#palpable-content-2',
+                ],
+              },
+              'ContentModel': {
+                'default': '#phrasing-content-2',
+              },
+            },
+          };
+
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });

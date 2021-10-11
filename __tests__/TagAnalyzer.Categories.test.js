@@ -275,4 +275,31 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  describe.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])(
+      'For tag=%s', (tag) => {
+        it.each`
+          parameter            | expected
+          ${undefined}         | ${['#flow-content-2', '#heading-content-2', '#palpable-content-2']}
+          ${'#other-content'}  | ${['#flow-content-2', '#heading-content-2', '#palpable-content-2']}
+        `(`Get categoties by $parameter for "${tag}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = {
+            'rules': {
+              'Categories': {
+                'any': [
+                  '#flow-content-2',
+                  '#heading-content-2',
+                  '#palpable-content-2',
+                ],
+              },
+              'ContentModel': {
+                'default': '#phrasing-content-2',
+              },
+            },
+          };
+
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 });
