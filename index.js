@@ -109,6 +109,8 @@ class TagAnalyzer {
     if (defaultCond) {
       return new Set(this.defaultCond(defaultCond)).has(text);
     }
+
+    return false;
   }
 }
 
