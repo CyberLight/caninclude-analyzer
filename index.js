@@ -91,6 +91,13 @@ class TagAnalyzer {
     return [o];
   }
 
+  butNo(o) {
+    if (Array.isArray(o)) {
+      return o;
+    }
+    return [o];
+  }
+
   getCategories(text) {
     const {Categories} = this.tagMetadata.rules;
     const {
@@ -125,6 +132,7 @@ class TagAnalyzer {
       default: defaultCond,
       oneOrMore,
       and,
+      butNo,
     } = ContentModel;
 
     if (onlyOne) {
@@ -153,6 +161,10 @@ class TagAnalyzer {
 
     if (oneOrMore) {
       return new Set(this.oneOrMore(oneOrMore)).has(text);
+    }
+
+    if (butNo) {
+      return !new Set(this.butNo(butNo)).has(text);
     }
 
     return false;
