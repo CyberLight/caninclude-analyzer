@@ -26,6 +26,7 @@ class TagAnalyzer {
       if (item.oneOrMore) return this.oneOrMore(item.oneOrMore);
       if (item.onlyOne) return this.onlyOne(item.onlyOne);
       if (item.optional) return this.optional(item.optional);
+      if (item.default) return this.defaultCond(item.default);
     });
   }
 
