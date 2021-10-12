@@ -294,4 +294,18 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                  | expected
+        ${'#flow-content-2'}       | ${true}
+        ${'#the-header-element'}   | ${false}
+        ${'#the-footer-element'}   | ${false}
+        ${'#sectioning-content-2'} | ${false}
+        ${'#heading-content-2'}    | ${false}
+    `('Can include $parameter to "dt" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.dt;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
