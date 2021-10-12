@@ -353,4 +353,19 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                          | expected
+        ${['childOf:#the-dl-element', '#the-dt-element']}  | ${true}
+        ${['childOf:#the-dl-element', '#the-dd-element']}  | ${true}
+        ${'#flow-content-2'}                               | ${true}
+        ${['#flow-content-2']}                             | ${true}
+        ${['childOf:#the-dl-element', '#other-content']}   | ${false}
+        ${'#other-content'}                                | ${false}
+    `('Can include $parameter to "div" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.div;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
