@@ -23,7 +23,9 @@ class TagAnalyzer {
   or(arr) {
     return arr.flatMap((item) => {
       if (item.zeroOrMore) return this.zeroOrMore(item.zeroOrMore);
+      if (item.oneOrMore) return this.oneOrMore(item.oneOrMore);
       if (item.onlyOne) return this.onlyOne(item.onlyOne);
+      if (item.optional) return this.optional(item.optional);
     });
   }
 
@@ -40,6 +42,13 @@ class TagAnalyzer {
     return o !== text;
   }
 
+  hasOne(o, text) {
+    if (Array.isArray(o)) {
+      return new Set(o).has(text);
+    }
+    return o == text;
+  }
+
   ifthen(o) {
     if (Array.isArray(o)) {
       return o;
@@ -53,17 +62,11 @@ class TagAnalyzer {
         return this.ifthen(o.then);
       }
     }
-    if (o.hasOne) {
-      if (o.hasOne === text) {
-        return this.ifthen(o.then);
-      }
+    if (o.hasOne && this.hasOne(o.hasOne, text)) {
+      return this.ifthen(o.then);
     }
-    if (o.not) {
-      if (this.not(o, text)) {
-        if (o.then) return this.ifthen(o.then);
-      } else {
-        return [];
-      }
+    if (o.not && this.not(o, text)) {
+      if (o.then) return this.ifthen(o.then);
     }
     return [];
   }
