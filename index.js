@@ -57,7 +57,34 @@ class TagAnalyzer {
     return [o];
   }
 
+  ifelse(o) {
+    if (Array.isArray(o)) {
+      return o;
+    }
+    return [o];
+  }
+
+  childOf(o, text) {
+    if (Array.isArray(text)) {
+      const childOfPattern = 'childOf:';
+      const [childOf] = text.filter((o) => o.startsWith(childOfPattern));
+      if (String(childOf).replace(childOfPattern, '') === o.childOf) {
+        return this.ifthen(o.then);
+      } else if (o.else) {
+        return this.ifelse(o.else);
+      }
+    } else if (text === o.childOf) {
+      return this.ifthen(o.then);
+    } else if (o.else) {
+      return this.ifelse(o.else);
+    }
+    return [];
+  }
+
   ifCond(o, text) {
+    if (o.childOf) {
+      return this.childOf(o, text);
+    }
     if (o.is) {
       if (o.is === text) {
         return this.ifthen(o.then);
@@ -105,6 +132,18 @@ class TagAnalyzer {
       return o;
     }
     return [o];
+  }
+
+  normalize(text) {
+    const keywords = ['childOf:'];
+    if (Array.isArray(text)) {
+      const filtered = text.filter((t) => !keywords.some((kw) => t.startsWith(kw)));
+      if (filtered.length === 1) {
+        return filtered[0];
+      }
+      return filtered;
+    }
+    return text;
   }
 
   getCategories(text) {
@@ -161,7 +200,7 @@ class TagAnalyzer {
     }
 
     if (ifCond) {
-      return new Set(this.ifCond(ifCond, text)).has(text);
+      return new Set(this.ifCond(ifCond, text)).has(this.normalize(text));
     }
 
     if (defaultCond) {
