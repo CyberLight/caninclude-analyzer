@@ -280,4 +280,18 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                           | expected
+        ${'#the-div-element'}               | ${true}
+        ${'#the-dt-element'}                | ${true}
+        ${'#the-dd-element'}                | ${true}
+        ${'#script-supporting-elements-2'}  | ${true}
+        ${'#other-content'}                 | ${false}
+    `('Can include $parameter to "dl" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.dl;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
