@@ -490,8 +490,10 @@
                 ]
             },
             "ContentModel": {
-                "default": "#flow-content-2",
-                "onlyOne": "#the-figcaption-element"
+              "or": [
+                { "default": "#flow-content-2" },
+                { "onlyOne": "#the-figcaption-element" }
+              ]
             }
         }
     },
