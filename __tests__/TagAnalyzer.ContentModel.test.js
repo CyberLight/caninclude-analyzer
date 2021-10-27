@@ -445,4 +445,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                    | expected
+        ${'#text-content'}                                           | ${true}
+        ${['attribute:#attr-time-datetime', '#phrasing-content-2']}  | ${true}
+        ${['attribute:#attr-time-datetime', '#other-content']}       | ${false}
+        ${undefined}                                                 | ${false}
+    `('Can include $parameter to "time" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.time;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
