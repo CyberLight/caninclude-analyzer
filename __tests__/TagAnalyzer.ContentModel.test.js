@@ -429,8 +429,8 @@ describe('TagAnalyzer::ContentModel', () => {
   it.each`
         parameter                                                    | expected
         ${'#text-content'}                                           | ${true}
-        ${['attribute:#attr-time-datetime', '#phrasing-content-2']}  | ${true}
-        ${['attribute:#attr-time-datetime', '#other-content']}       | ${false}
+        ${['hasAttr:#attr-time-datetime', '#phrasing-content-2']}  | ${true}
+        ${['hasAttr:#attr-time-datetime', '#other-content']}       | ${false}
         ${undefined}                                                 | ${false}
     `('Can include $parameter to "time" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.time;
