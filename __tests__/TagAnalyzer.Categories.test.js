@@ -455,4 +455,19 @@ describe('TagAnalyzer::Categories', () => {
           expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter           | expected
+        ${undefined}        | ${['#flow-content-2',
+  '#phrasing-content-2',
+  '#embedded-content-category',
+  '#category-listed',
+  '#form-associated-element',
+  '#palpable-content-2']}
+    `('Get categoties by $parameter for "object" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.object;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });

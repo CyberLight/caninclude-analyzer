@@ -518,4 +518,15 @@ describe('TagAnalyzer::ContentModel', () => {
           expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                                                 | expected
+        ${['hasChild:#the-param-element', '#the-source-element']} | ${'unknown'}
+        ${'#the-source-element'}                                  | ${false}
+    `('Can include $parameter to "object" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.object;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
