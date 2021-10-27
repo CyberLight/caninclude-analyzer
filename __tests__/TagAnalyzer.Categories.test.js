@@ -357,4 +357,15 @@ describe('TagAnalyzer::Categories', () => {
           expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                 | expected
+        ${undefined}              | ${[]}
+  '#palpable-content-2']}
+    `('Get categoties by $parameter for "rt" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.rt;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
