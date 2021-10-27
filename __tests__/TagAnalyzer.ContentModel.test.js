@@ -433,4 +433,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${'#text-content'}   | ${true}
+        ${'#other-content'}  | ${false}
+        ${undefined}         | ${false}
+    `('Can include $parameter to "rp" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.rp;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
