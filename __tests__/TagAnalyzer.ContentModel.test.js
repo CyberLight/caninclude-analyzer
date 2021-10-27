@@ -393,4 +393,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                | expected
+        ${'#phrasing-content-2'} | ${true}
+        ${'#other-content'}      | ${false}
+        ${undefined}             | ${false}
+    `('Can include $parameter to "strong" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.strong;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
