@@ -694,10 +694,6 @@
                             "#the-rp-element",
                             "#the-rt-element"
                         ]
-                    },
-                    {
-                        "onlyOne": "#the-ruby-element",
-                        "noChild": "#the-ruby-element"
                     }
                 ]
             }
