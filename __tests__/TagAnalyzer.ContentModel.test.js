@@ -371,7 +371,7 @@ describe('TagAnalyzer::ContentModel', () => {
 
   it.each`
         parameter                    | expected
-        ${['#some-element']}         | ${false}
+        ${['#some-element']}         | ${'unknown'}
         ${'#interactive-content-2'}  | ${false}
         ${'#the-a-element'}          | ${false}
         ${'#attr-tabindex'}          | ${false}
@@ -468,6 +468,21 @@ describe('TagAnalyzer::ContentModel', () => {
         ${'#concept-content-nothing'} | ${true}
         ${'#other-content'}           | ${false}
         ${undefined}                  | ${false}
+    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
+
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
+
+  describe.each(['ins'])(
+      'For tag=%s', (tagName) => {
+        it.each`
+        parameter                     | expected
+        ${'#transparent'}             | ${'unknown'}
+        ${'#other-content'}           | ${'unknown'}
+        ${undefined}                  | ${'unknown'}
     `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
           const tag = rules[tagName];
 
