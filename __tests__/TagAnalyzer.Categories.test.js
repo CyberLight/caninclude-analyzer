@@ -402,4 +402,14 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter    | expected
+        ${undefined} | ${['#flow-content-2', '#phrasing-content-2', '#embedded-content-category']}
+    `('Get categoties by $parameter for "picture" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.picture;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });

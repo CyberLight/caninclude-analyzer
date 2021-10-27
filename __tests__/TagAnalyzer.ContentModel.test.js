@@ -490,4 +490,17 @@ describe('TagAnalyzer::ContentModel', () => {
           expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                           | expected
+        ${'#the-source-element'}            | ${true}
+        ${'#the-img-element'}               | ${true}
+        ${'#script-supporting-elements-2'}  | ${true}
+        ${'#other-content'}                 | ${false}
+    `('Can include $parameter to "picture" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.picture;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
