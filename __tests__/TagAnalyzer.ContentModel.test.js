@@ -368,6 +368,7 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
   it.each`
         parameter                    | expected
         ${['#some-element']}         | ${false}
@@ -376,6 +377,18 @@ describe('TagAnalyzer::ContentModel', () => {
         ${'#attr-tabindex'}          | ${false}
     `('Can include $parameter to "a" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.a;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                | expected
+        ${'#phrasing-content-2'} | ${true}
+        ${'#other-content'}      | ${false}
+        ${undefined}             | ${false}
+    `('Can include $parameter to "em" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.em;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
