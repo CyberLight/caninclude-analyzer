@@ -382,6 +382,18 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
+  it.each`
+        parameter                | expected
+        ${'#phrasing-content-2'} | ${true}
+        ${'#the-dfn-element'}    | ${false}
+        ${'#other-element'}      | ${false}
+    `('Can include $parameter to "dfn" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.dfn;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+
   describe.each(['em', 'strong', 'small', 's', 'cite', 'q'])(
       'For tag=%s', (tagName) => {
         it.each`
