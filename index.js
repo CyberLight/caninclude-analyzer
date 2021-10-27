@@ -1,6 +1,8 @@
 /* eslint-disable require-jsdoc */
 const {readFile} = require('fs');
 
+const TagAnalyzerUnknown = 'unknown';
+
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
@@ -181,6 +183,10 @@ class TagAnalyzer {
     return {condition: undefined, text};
   }
 
+  isTransparent(setOfparams) {
+    return setOfparams.has('#transparent');
+  }
+
   getCategories(text) {
     const {Categories} = this.tagMetadata.rules;
     const {
@@ -239,16 +245,19 @@ class TagAnalyzer {
       return new Set(this.ifCond(ifCond, condition || actualText)).has(this.normalize(text));
     }
 
-    if (defaultCond) {
-      return new Set(this.defaultCond(defaultCond)).has(text);
-    }
-
     if (oneOrMore) {
       return new Set(this.oneOrMore(oneOrMore)).has(text);
     }
 
     if (butNo) {
-      return !new Set(this.butNo(butNo)).has(text);
+      const paramsSet = new Set(this.butNo(butNo));
+      if (paramsSet.has(text)) return false;
+    }
+
+    if (defaultCond) {
+      const paramsSet = new Set(this.defaultCond(defaultCond));
+      if (this.isTransparent(paramsSet)) return TagAnalyzerUnknown;
+      return paramsSet.has(text);
     }
 
     return false;
