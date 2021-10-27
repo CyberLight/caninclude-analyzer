@@ -345,7 +345,7 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['em', 'strong', 'small'])(
+  describe.each(['em', 'strong', 'small', 's', 'cite', 'q'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                 | expected
