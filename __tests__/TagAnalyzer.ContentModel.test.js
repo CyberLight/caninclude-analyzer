@@ -504,7 +504,7 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['source', 'img', 'iframe'])(
+  describe.each(['source', 'img', 'iframe', 'embed'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                     | expected
