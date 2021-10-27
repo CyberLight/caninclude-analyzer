@@ -504,15 +504,18 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['source', 'img'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter                     | expected
         ${'#concept-content-nothing'} | ${true}
         ${'#other-content'}           | ${false}
         ${undefined}                  | ${false}
-    `('Can include $parameter to "source" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.source;
+    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });

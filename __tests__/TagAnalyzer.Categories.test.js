@@ -423,4 +423,19 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter           | expected
+        ${undefined}        | ${['#flow-content-2', '#phrasing-content-2',
+  '#embedded-content-category', '#form-associated-element',
+  '#palpable-content-2']}
+        ${'#attr-hyperlink-usemap'} | ${['#interactive-content-2', '#flow-content-2', '#phrasing-content-2',
+  '#embedded-content-category', '#form-associated-element',
+  '#palpable-content-2']}
+    `('Get categoties by $parameter for "img" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.img;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
