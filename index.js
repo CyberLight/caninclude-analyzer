@@ -4,6 +4,7 @@ const {readFile} = require('fs');
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
+    this.keywords = ['childOf:', 'attribute:'];
   }
 
   onlyOne(o) {
@@ -106,6 +107,9 @@ class TagAnalyzer {
     if (o.not && this.not(o, text)) {
       if (o.then) return this.ifthen(o.then);
     }
+    if (o.else) {
+      return this.ifelse(o.else);
+    }
     return [];
   }
 
@@ -145,15 +149,36 @@ class TagAnalyzer {
   }
 
   normalize(text) {
-    const keywords = ['childOf:'];
     if (Array.isArray(text)) {
-      const filtered = text.filter((t) => !keywords.some((kw) => t.startsWith(kw)));
+      const filtered = text.filter((t) => !this.keywords.some((kw) => t.startsWith(kw)));
       if (filtered.length === 1) {
         return filtered[0];
       }
       return filtered;
     }
     return text;
+  }
+
+  hasKeyword(text) {
+    return this.keywords.some((kw) => text.startsWith(kw));
+  }
+
+  cleanFromKeywords(text) {
+    return this.keywords.reduce((result, kw) => result.replace(kw, ''), text);
+  }
+
+  parseText(text) {
+    if (Array.isArray(text)) {
+      return text.reduce((result, item) => {
+        if (this.hasKeyword(item)) {
+          result.condition = this.cleanFromKeywords(item);
+        } else {
+          result.text = item;
+        }
+        return result;
+      }, {condition: undefined, text: undefined});
+    }
+    return {condition: undefined, text};
   }
 
   getCategories(text) {
@@ -210,7 +235,8 @@ class TagAnalyzer {
     }
 
     if (ifCond) {
-      return new Set(this.ifCond(ifCond, text)).has(this.normalize(text));
+      const {condition, text: actualText} = this.parseText(text);
+      return new Set(this.ifCond(ifCond, condition || actualText)).has(this.normalize(text));
     }
 
     if (defaultCond) {
