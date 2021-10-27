@@ -409,7 +409,7 @@ describe('TagAnalyzer::ContentModel', () => {
 
   describe.each(['em', 'strong', 'small', 's', 'cite', 'q', 'abbr',
     'data', 'code', 'var', 'samp', 'kbd', 'sub', 'sup', 'i', 'b', 'u',
-    'mark', 'bdi', 'bdo'])(
+    'mark', 'bdi', 'bdo', 'span'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                | expected

@@ -347,7 +347,7 @@ describe('TagAnalyzer::Categories', () => {
 
   describe.each(['em', 'strong', 'small', 's', 'cite', 'q', 'dfn',
     'abbr', 'ruby', 'data', 'time', 'code', 'var', 'samp', 'kbd', 'sub',
-    'sup', 'i', 'b', 'u', 'mark', 'bdi', 'bdo'])(
+    'sup', 'i', 'b', 'u', 'mark', 'bdi', 'bdo', 'span'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                 | expected
