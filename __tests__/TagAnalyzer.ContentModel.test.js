@@ -503,4 +503,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                     | expected
+        ${'#concept-content-nothing'} | ${true}
+        ${'#other-content'}           | ${false}
+        ${undefined}                  | ${false}
+    `('Can include $parameter to "source" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.source;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });

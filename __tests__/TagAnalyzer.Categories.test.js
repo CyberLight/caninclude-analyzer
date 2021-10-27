@@ -412,4 +412,15 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter           | expected
+        ${undefined}        | ${[]}
+        ${'#other-content'} | ${[]}
+    `('Get categoties by $parameter for "source" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.source;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
