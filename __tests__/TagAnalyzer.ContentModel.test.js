@@ -476,7 +476,7 @@ describe('TagAnalyzer::ContentModel', () => {
         });
       });
 
-  describe.each(['ins'])(
+  describe.each(['ins', 'del'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                     | expected
