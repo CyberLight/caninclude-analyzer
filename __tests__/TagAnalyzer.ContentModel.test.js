@@ -40,17 +40,6 @@ describe('TagAnalyzer::ContentModel', () => {
   });
 
   it.each`
-        parameter                      | expected
-        ${'#concept-content-nothing'}  | ${true}
-        ${'#inter-body-element'}       | ${false}
-    `('Can include $parameter to "base" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.base;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
         parameter          | expected
         ${'#any-content'}  | ${false}
         ${undefined}       | ${false}
@@ -217,17 +206,6 @@ describe('TagAnalyzer::ContentModel', () => {
         ${'#palpable-content-2'}   | ${false}
     `('Can include $parameter to "p" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.p;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter                     | expected
-        ${'#concept-content-nothing'} | ${true}
-        ${'#other-content'}           | ${false}
-    `('Can include $parameter to "hr" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.hr;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
@@ -461,7 +439,7 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['br', 'wbr'])(
+  describe.each(['hr', 'base', 'source', 'img', 'iframe', 'embed', 'br', 'wbr', 'param'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                     | expected
@@ -503,21 +481,6 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
-
-  describe.each(['source', 'img', 'iframe', 'embed'])(
-      'For tag=%s', (tagName) => {
-        it.each`
-        parameter                     | expected
-        ${'#concept-content-nothing'} | ${true}
-        ${'#other-content'}           | ${false}
-        ${undefined}                  | ${false}
-    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
-          const tag = rules[tagName];
-
-          const analyzer = new TagAnalyzer(tag);
-          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-        });
-      });
 
   it.each`
         parameter                                                 | expected

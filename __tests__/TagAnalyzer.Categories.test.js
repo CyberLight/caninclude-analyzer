@@ -413,16 +413,19 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['source', 'param'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter           | expected
         ${undefined}        | ${[]}
         ${'#other-content'} | ${[]}
-    `('Get categoties by $parameter for "source" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.source;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 
   it.each`
         parameter           | expected
