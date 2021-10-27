@@ -394,6 +394,19 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
+  it.each`
+        parameter                | expected
+        ${'#phrasing-content-2'} | ${true}
+        ${'#the-ruby-element'}   | ${false}
+        ${'#the-rp-element'}     | ${true}
+        ${'#the-rt-element'}     | ${true}
+    `('Can include $parameter to "ruby" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.ruby;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+
   describe.each(['em', 'strong', 'small', 's', 'cite', 'q', 'abbr'])(
       'For tag=%s', (tagName) => {
         it.each`
