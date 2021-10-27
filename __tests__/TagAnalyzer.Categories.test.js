@@ -379,4 +379,17 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  describe.each(['br', 'wbr'])(
+      'For tag=%s', (tagName) => {
+        it.each`
+        parameter                 | expected
+        ${undefined}              | ${['#flow-content-2', '#phrasing-content-2']}
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
+
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 });
