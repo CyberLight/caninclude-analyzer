@@ -407,7 +407,7 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['em', 'strong', 'small', 's', 'cite', 'q', 'abbr', 'data', 'code', 'var', 'samp', 'kbd'])(
+  describe.each(['em', 'strong', 'small', 's', 'cite', 'q', 'abbr', 'data', 'code', 'var', 'samp', 'kbd', 'sub'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                | expected
