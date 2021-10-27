@@ -50,6 +50,13 @@ class TagAnalyzer {
     return o == text;
   }
 
+  has(o, text) {
+    if (Array.isArray(o)) {
+      return new Set(o).has(text);
+    }
+    return o == text;
+  }
+
   ifthen(o) {
     if (Array.isArray(o)) {
       return o;
@@ -91,6 +98,9 @@ class TagAnalyzer {
       }
     }
     if (o.hasOne && this.hasOne(o.hasOne, text)) {
+      return this.ifthen(o.then);
+    }
+    if (o.has && this.has(o.has, text)) {
       return this.ifthen(o.then);
     }
     if (o.not && this.not(o, text)) {
