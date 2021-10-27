@@ -368,4 +368,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+  it.each`
+        parameter                    | expected
+        ${['#some-element']}         | ${false}
+        ${'#interactive-content-2'}  | ${false}
+        ${'#the-a-element'}          | ${false}
+        ${'#attr-tabindex'}          | ${false}
+    `('Can include $parameter to "a" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.a;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
