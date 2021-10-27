@@ -7,7 +7,7 @@ const TagAnalyzerTransparent = '#transparent';
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
-    this.keywords = ['hasChild:', 'childOf:', 'attribute:'];
+    this.keywords = ['hasChild:', 'childOf:', 'hasAttr:'];
   }
 
   onlyOne(o) {
