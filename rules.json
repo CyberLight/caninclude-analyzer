@@ -739,11 +739,10 @@
                 ]
             },
             "ContentModel": {
-                "default": "#text-content",
-                "format": "matter",
                 "if": {
                     "has": "#attr-time-datetime",
-                    "then": "#phrasing-content-2"
+                    "then": "#phrasing-content-2",
+                    "else": "#text-content"
                 }
             }
         }
