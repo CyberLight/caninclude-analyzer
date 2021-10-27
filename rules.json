@@ -992,11 +992,15 @@
                 ]
             },
             "ContentModel": {
-                "zeroOrMore":[
+              "or": [
+                {
+                  "zeroOrMore":[
                     "#the-source-element",
                     "#the-img-element"
-                ],
-                "optional": "#script-supporting-elements-2"
+                  ]
+                },
+                { "optional": "#script-supporting-elements-2" }
+              ]
             }
         }
     },
