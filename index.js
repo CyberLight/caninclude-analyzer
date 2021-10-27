@@ -2,11 +2,12 @@
 const {readFile} = require('fs');
 
 const TagAnalyzerUnknown = 'unknown';
+const TagAnalyzerTransparent = '#transparent';
 
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
-    this.keywords = ['childOf:', 'attribute:'];
+    this.keywords = ['hasChild:', 'childOf:', 'attribute:'];
   }
 
   onlyOne(o) {
@@ -21,6 +22,10 @@ class TagAnalyzer {
       return o;
     }
     return [o];
+  }
+
+  hasZeroOrMore(o, text) {
+    return new Set(this.zeroOrMore(o)).has(text);
   }
 
   or(arr) {
@@ -112,6 +117,9 @@ class TagAnalyzer {
     if (o.else) {
       return this.ifelse(o.else);
     }
+    if (o.zeroOrMore && this.hasZeroOrMore(o.zeroOrMore, text)) {
+      return this.ifthen(o.then);
+    }
     return [];
   }
 
@@ -183,8 +191,8 @@ class TagAnalyzer {
     return {condition: undefined, text};
   }
 
-  isTransparent(setOfparams) {
-    return setOfparams.has('#transparent');
+  isTransparent(setOfParams) {
+    return setOfParams.has(TagAnalyzerTransparent);
   }
 
   getCategories(text) {
@@ -242,7 +250,11 @@ class TagAnalyzer {
 
     if (ifCond) {
       const {condition, text: actualText} = this.parseText(text);
-      return new Set(this.ifCond(ifCond, condition || actualText)).has(this.normalize(text));
+      const ifCondSet = new Set(this.ifCond(ifCond, condition || actualText));
+      if (this.isTransparent(ifCondSet)) {
+        return TagAnalyzerUnknown;
+      }
+      return ifCondSet.has(this.normalize(text));
     }
 
     if (oneOrMore) {
