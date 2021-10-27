@@ -382,27 +382,18 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['em', 'strong', 'small'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter                | expected
         ${'#phrasing-content-2'} | ${true}
         ${'#other-content'}      | ${false}
         ${undefined}             | ${false}
-    `('Can include $parameter to "em" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.em;
+    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter                | expected
-        ${'#phrasing-content-2'} | ${true}
-        ${'#other-content'}      | ${false}
-        ${undefined}             | ${false}
-    `('Can include $parameter to "strong" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.strong;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });

@@ -345,23 +345,16 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['em', 'strong', 'small'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter                 | expected
         ${undefined}              | ${['#flow-content-2', '#phrasing-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "em" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.em;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter                 | expected
-        ${undefined}              | ${['#flow-content-2', '#phrasing-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "strong" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.strong;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 });
