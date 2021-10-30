@@ -1147,29 +1147,23 @@
             },
             "ContentModel": {
                 "if": {
-                    "and": [
-                        { "has": "#attr-media-src" },
-                        { "zeroOrMore": "#the-track-element" },
-                        { "noChild": "#media-element" }
-                    ],
-                    "then": "#transparent"
-                },
-                "elseif": {
-                    "and": [
-                        {
-                            "notHas": "#attr-media-src"
-                        },
-                        {
-                            "zeroOrMore": "#the-source-element"
-                        },
-                        {
-                            "zeroOrMore": "#the-track-element"
-                        },
-                        {
-                            "noChild": "#media-element"
-                        }
-                    ],
-                    "then": "#transparent"
+                  "and": [
+                      { "has": "#attr-media-src" },
+                      { "zeroOrMore": "#the-track-element" },
+                      { "noChild": "#media-element" }
+                  ],
+                  "then": "#transparent",
+                  "elseif": {
+                      "and": [
+                        { "and": [
+                            { "notHas": "#attr-media-src" },
+                            { "noChild": "#media-element" },
+                            { "zeroOrMore": ["#the-source-element", "#the-track-element"] }
+                        ]},
+                        { "oneOfChild": ["#the-source-element", "#the-track-element"] }
+                      ],
+                      "then": "#transparent"
+                  }
                 }
             }
         }
