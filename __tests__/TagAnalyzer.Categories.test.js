@@ -486,4 +486,18 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                  | expected
+        ${undefined}               | ${['#flow-content-2', '#phrasing-content-2', '#embedded-content-category']}
+        ${'#attr-media-controls'}  | ${['#interactive-content-2',
+  '#palpable-content-2', '#flow-content-2',
+  '#phrasing-content-2',
+  '#embedded-content-category']}
+    `('Get categoties by $parameter for "audio" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.audio;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });

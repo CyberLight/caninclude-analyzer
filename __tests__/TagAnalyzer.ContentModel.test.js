@@ -493,18 +493,21 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
-        parameter                                            | expected
-        ${['hasAttr:#attr-media-src', '#the-track-element']} | ${'unknown'}
-        ${['hasAttr:#attr-media-src']}                       | ${'unknown'}
-        ${'#media-element'}                                  | ${false}
-        ${'#the-source-element'}                             | ${'unknown'}
-        ${'#the-track-element'}                              | ${'unknown'}
-        ${'#flow-content-2'}                                 | ${false}
-    `('Can include $parameter to "video" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.video;
+  describe.each(['video', 'audio'])(
+      'For tag=%s', (tagName) => {
+        it.each`
+            parameter                                            | expected
+            ${['hasAttr:#attr-media-src', '#the-track-element']} | ${'unknown'}
+            ${['hasAttr:#attr-media-src']}                       | ${'unknown'}
+            ${'#media-element'}                                  | ${false}
+            ${'#the-source-element'}                             | ${'unknown'}
+            ${'#the-track-element'}                              | ${'unknown'}
+            ${'#flow-content-2'}                                 | ${false}
+        `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });
