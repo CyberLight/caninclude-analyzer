@@ -3,11 +3,16 @@ const {readFile} = require('fs');
 
 const TagAnalyzerUnknown = 'unknown';
 const TagAnalyzerTransparent = '#transparent';
+const TagAnalyzerSkipResult = 'skip';
 
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
     this.keywords = ['hasChild:', 'childOf:', 'hasAttr:'];
+  }
+
+  withoutSkip(v) {
+    return v !== TagAnalyzerSkipResult;
   }
 
   onlyOne(o) {
@@ -25,7 +30,30 @@ class TagAnalyzer {
   }
 
   hasZeroOrMore(o, text) {
-    return new Set(this.zeroOrMore(o)).has(text);
+    return new Set(this.zeroOrMore(o)).has(text) || TagAnalyzerSkipResult;
+  }
+
+  hasOptional(o, text) {
+    return new Set(this.optional(o)).has(text) || TagAnalyzerSkipResult;
+  }
+
+  hasOneOrMore(o, text) {
+    return new Set(this.oneOrMore(o)).has(text);
+  }
+
+  hasOnlyOne(o, text) {
+    return new Set(this.onlyOne(o)).has(text);
+  }
+
+  hasDefaultCond(o, text) {
+    return new Set(this.defaultCond(o)).has(text);
+  }
+
+  hasOneOfChild(o, text) {
+    if (Array.isArray(o)) {
+      return new Set(o).has(text);
+    }
+    return new Set([o]).has(text);
   }
 
   or(arr) {
@@ -45,6 +73,37 @@ class TagAnalyzer {
       if (item.zeroOrMore) return this.zeroOrMore(item.zeroOrMore);
       if (item.onlyOne) return this.onlyOne(item.onlyOne);
     });
+  }
+
+  hasOr(arr, text) {
+    const result = arr.flatMap((item) => {
+      if (item.and) return this.hasAnd(item.and, text);
+      if (item.or) return this.hasOr(item.or, text);
+      if (item.zeroOrMore) return this.hasZeroOrMore(item.zeroOrMore, text);
+      if (item.oneOrMore) return this.hasOneOrMore(item.oneOrMore, text);
+      if (item.onlyOne) return this.hasOnlyOne(item.onlyOne, text);
+      if (item.optional) return this.hasOptional(item.optional, text);
+      if (item.default) return this.hasDefaultCond(item.default, text);
+      if (item.notHas) return this.notHas(item.notHas, text);
+      if (item.oneOfChild) return this.hasOneOfChild(item.oneOfChild, text);
+    });
+    return result.filter(this.withoutSkip).some(Boolean);
+  }
+
+  hasAnd(arr, text) {
+    const result = arr.flatMap((item) => {
+      if (item.and) return this.hasAnd(item.and, text);
+      if (item.or) return this.hasOr(item.or, text);
+      if (item.oneOrMore) return this.hasOneOrMore(item.oneOrMore, text);
+      if (item.optional) return this.hasOptional(item.optional, text);
+      if (item.zeroOrMore) return this.hasZeroOrMore(item.zeroOrMore, text);
+      if (item.onlyOne) return this.hasOnlyOne(item.onlyOne, text);
+      if (item.has) return this.has(item.has, text);
+      if (item.notHas) return this.notHas(item.notHas, text);
+      if (item.noChild) return this.hasNoChild(item.noChild, text);
+      if (item.oneOfChild) return this.hasOneOfChild(item.oneOfChild, text);
+    });
+    return result.filter(this.withoutSkip).every(Boolean);
   }
 
   not(o, text) {
@@ -120,6 +179,22 @@ class TagAnalyzer {
     if (o.zeroOrMore && this.hasZeroOrMore(o.zeroOrMore, text)) {
       return this.ifthen(o.then);
     }
+    if (o.or) {
+      const result = this.hasOr(o.or, text);
+      if (o.then && result) {
+        return this.ifthen(o.then);
+      } else if (o.elseif && !result) {
+        return this.ifCond(o.elseif, text);
+      }
+    }
+    if (o.and) {
+      const result = this.hasAnd(o.and, text);
+      if (o.then && result) {
+        return this.ifthen(o.then);
+      } else if (o.elseif && !result) {
+        return this.ifCond(o.elseif, text);
+      }
+    }
     return [];
   }
 
@@ -156,6 +231,20 @@ class TagAnalyzer {
       return o;
     }
     return [o];
+  }
+
+  hasNoChild(o, text) {
+    if (Array.isArray(o)) {
+      return !new Set(o).has(text);
+    }
+    return o !== text;
+  }
+
+  notHas(o, text) {
+    if (Array.isArray(o)) {
+      return !new Set(o).has(text);
+    }
+    return o !== text;
   }
 
   normalize(text) {
@@ -241,11 +330,11 @@ class TagAnalyzer {
     }
 
     if (or) {
-      return new Set(this.or(or)).has(text);
+      return this.hasOr(or, text);
     }
 
     if (and) {
-      return new Set(this.and(and)).has(text);
+      return this.hasAnd(and, text);
     }
 
     if (ifCond) {
