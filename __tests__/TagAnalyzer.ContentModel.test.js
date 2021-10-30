@@ -439,7 +439,7 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['hr', 'base', 'source', 'img', 'iframe', 'embed', 'br', 'wbr', 'param', 'track'])(
+  describe.each(['hr', 'base', 'source', 'img', 'iframe', 'embed', 'br', 'wbr', 'param', 'track', 'area'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                     | expected
@@ -510,4 +510,15 @@ describe('TagAnalyzer::ContentModel', () => {
           expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
         });
       });
+
+  it.each`
+        parameter                                                 | expected
+        ${undefined}                                              | ${'unknown'}
+        ${'#the-any-other-element'}                               | ${'unknown'}
+    `('Can include $parameter to "map" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.map;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });

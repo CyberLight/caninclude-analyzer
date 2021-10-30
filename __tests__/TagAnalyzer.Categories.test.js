@@ -511,4 +511,26 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#flow-content-2', '#phrasing-content-2', '#palpable-content-2']}
+        ${'#other-content'}  | ${['#flow-content-2', '#phrasing-content-2', '#palpable-content-2']}
+    `('Get categoties by $parameter for "map" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.map;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#flow-content-2', '#phrasing-content-2']}
+        ${'#other-content'}  | ${['#flow-content-2', '#phrasing-content-2']}
+    `('Get categoties by $parameter for "area" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.area;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
