@@ -485,9 +485,24 @@ describe('TagAnalyzer::ContentModel', () => {
   it.each`
         parameter                                                 | expected
         ${['hasChild:#the-param-element', '#the-source-element']} | ${'unknown'}
-        ${'#the-source-element'}                                  | ${false}
+        ${'#the-source-element'}                                  | ${'unknown'}
     `('Can include $parameter to "object" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.object;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                                            | expected
+        ${['hasAttr:#attr-media-src', '#the-track-element']} | ${'unknown'}
+        ${['hasAttr:#attr-media-src']}                       | ${'unknown'}
+        ${'#media-element'}                                  | ${false}
+        ${'#the-source-element'}                             | ${'unknown'}
+        ${'#the-track-element'}                              | ${'unknown'}
+        ${'#flow-content-2'}                                 | ${false}
+    `('Can include $parameter to "video" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.video;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);

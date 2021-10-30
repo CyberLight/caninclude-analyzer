@@ -473,4 +473,17 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                  | expected
+        ${undefined}               | ${['#flow-content-2', '#phrasing-content-2',
+  '#embedded-content-category', '#palpable-content-2']}
+        ${'#attr-media-controls'}  | ${['#interactive-content-2', '#flow-content-2', '#phrasing-content-2',
+  '#embedded-content-category', '#palpable-content-2']}
+    `('Get categoties by $parameter for "video" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.video;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
