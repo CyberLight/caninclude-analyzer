@@ -569,16 +569,19 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['tbody', 'thead'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter                                 | expected
         ${undefined}                              | ${false}
         ${'#the-any-other-element'}               | ${false}
         ${'#the-tr-element'}                      | ${true}
         ${'#script-supporting-elements-2'}        | ${true}
-    `('Can include $parameter to "tbody" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.tbody;
+    `(`Can include $parameter to "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+        });
+      });
 });
