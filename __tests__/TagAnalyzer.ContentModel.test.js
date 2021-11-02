@@ -553,4 +553,19 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                       | expected
+        ${undefined}                                                    | ${false}
+        ${'#the-any-other-element'}                                     | ${false}
+        ${['hasAttr:#attr-colgroup-span', '#concept-content-nothing']}  | ${true}
+        ${['hasAttr:#attr-colgroup-span', '#the-any-other-element']}    | ${false}
+        ${'#the-col-element'}                                           | ${true}
+        ${'#the-template-element'}                                      | ${true}
+    `('Can include $parameter to "colgroup" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.colgroup;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
