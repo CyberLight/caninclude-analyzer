@@ -521,4 +521,22 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                               | expected
+        ${undefined}                                            | ${false}
+        ${'#the-any-other-element'}                             | ${false}
+        ${'#the-caption-element'}                               | ${true}
+        ${'#the-colgroup-element'}                              | ${true}
+        ${'#the-thead-element'}                                 | ${true}
+        ${'#the-tbody-element'}                                 | ${true}
+        ${'#the-tr-element'}                                    | ${true}
+        ${['#script-supporting-elements-2', '#the-tr-element']} | ${true}
+        ${['#the-tfoot-element', '#the-tr-element']}            | ${true}
+    `('Can include $parameter to "table" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.table;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
