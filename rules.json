@@ -1213,30 +1213,22 @@
             },
             "ContentModel": {
                 "or": [
-                    {
-                        "group":
-                        [
-                            { "optional": "#the-caption-element" },
-                            { "zeroOrMore":  "#the-colgroup-element" }
-                        ]
-                    },
-                    {
-                        "group": [
-                            {
-                                "optional": "#the-thead-element"
-                            },
-                            {
-                                "zeroOrMore": "#the-tbody-element"
-                            }
-                        ]
-                    },
-                    {
-                        "group": [
-                            { "oneOrMore":  "#the-tr-element" },
-                            { "optional": "#the-tfoot-element" },
-                            { "zeroOrMore": "#script-supporting-elements-2" }
-                        ]
-                    }
+                    { "and": [
+                        { "optional": "#the-caption-element" },
+                        { "zeroOrMore":  "#the-colgroup-element" },
+                        { "oneOfChild": ["#the-caption-element", "#the-colgroup-element"] }
+                    ]},
+                    { "and": [
+                        { "optional": "#the-thead-element" },
+                        { "zeroOrMore": "#the-tbody-element" },
+                        { "oneOfChild": [ "#the-thead-element", "#the-tbody-element" ] }
+                    ]},
+                    { "and": [
+                        { "oneOrMore": "#the-tr-element" },
+                        { "optional": "#the-tfoot-element" },
+                        { "zeroOrMore": "#script-supporting-elements-2" },
+                        { "oneOfChild": [ "#the-tr-element", "#the-tfoot-element", "#script-supporting-elements-2"] }
+                    ]}
                 ]
             }
         }
