@@ -1237,8 +1237,10 @@
         "rules": {
             "Categories": {},
             "ContentModel": {
-                "default": "#flow-content-2",
-                "noChild": "#the-table-element"
+              "and": [
+                { "default": "#flow-content-2" },
+                { "noChild": "#the-table-element" }
+              ]
             }
         }
     },
