@@ -104,6 +104,7 @@ class TagAnalyzer {
       if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
       if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
+      if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
     });
     return result.filter(this.withoutSkip).every(Boolean);
   }
