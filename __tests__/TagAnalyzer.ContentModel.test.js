@@ -569,7 +569,7 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['tbody', 'thead'])(
+  describe.each(['tbody', 'thead', 'tfoot'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter                                 | expected

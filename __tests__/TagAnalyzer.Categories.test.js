@@ -413,7 +413,7 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['source', 'param', 'caption', 'colgroup', 'col', 'tbody', 'thead'])(
+  describe.each(['source', 'param', 'caption', 'colgroup', 'col', 'tbody', 'thead', 'tfoot'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter           | expected
