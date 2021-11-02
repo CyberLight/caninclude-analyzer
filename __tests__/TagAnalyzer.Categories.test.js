@@ -544,4 +544,15 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#sectioning-root']}
+        ${'#other-content'}  | ${['#sectioning-root']}
+    `('Get categoties by $parameter for "td" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.td;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });

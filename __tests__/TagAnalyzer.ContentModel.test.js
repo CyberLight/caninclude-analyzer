@@ -598,4 +598,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                          | expected
+        ${undefined}                       | ${false}
+        ${'#the-any-other-element'}        | ${false}
+        ${'#flow-content-2'}               | ${true}
+    `('Can include $parameter to "td" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.td;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
