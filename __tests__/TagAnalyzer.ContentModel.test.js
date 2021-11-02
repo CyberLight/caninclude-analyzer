@@ -568,4 +568,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                 | expected
+        ${undefined}                              | ${false}
+        ${'#the-any-other-element'}               | ${false}
+        ${'#the-tr-element'}                      | ${true}
+        ${'#script-supporting-elements-2'}        | ${true}
+    `('Can include $parameter to "tbody" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.tbody;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
