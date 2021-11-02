@@ -1250,16 +1250,11 @@
             "ContentModel": {
                 "if": {
                     "has": "#attr-colgroup-span",
-                    "then": "#concept-content-nothing"
-                },
-                "elseif": {
-                    "notHas": "#attr-colgroup-span",
-                    "then": {
-                        "zeroOrMore": [
-                            "#the-col-element",
-                            "#the-template-element"
-                        ]
-                    }
+                    "then": "#concept-content-nothing",
+                    "else": [
+                      "#the-col-element",
+                      "#the-template-element"
+                    ]
                 }
             }
         }
