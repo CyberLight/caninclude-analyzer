@@ -76,32 +76,34 @@ class TagAnalyzer {
   }
 
   hasOr(arr, text) {
+    const checks = Array.isArray(text) ? text : [text];
     const result = arr.flatMap((item) => {
-      if (item.and) return this.hasAnd(item.and, text);
-      if (item.or) return this.hasOr(item.or, text);
-      if (item.zeroOrMore) return this.hasZeroOrMore(item.zeroOrMore, text);
-      if (item.oneOrMore) return this.hasOneOrMore(item.oneOrMore, text);
-      if (item.onlyOne) return this.hasOnlyOne(item.onlyOne, text);
-      if (item.optional) return this.hasOptional(item.optional, text);
-      if (item.default) return this.hasDefaultCond(item.default, text);
-      if (item.notHas) return this.notHas(item.notHas, text);
-      if (item.oneOfChild) return this.hasOneOfChild(item.oneOfChild, text);
+      if (item.and) return checks.map((text) => this.hasAnd(item.and, text));
+      if (item.or) return checks.map((text) => this.hasOr(item.or, text));
+      if (item.zeroOrMore) return checks.map((text) => this.hasZeroOrMore(item.zeroOrMore, text));
+      if (item.oneOrMore) return checks.map((text) => this.hasOneOrMore(item.oneOrMore, text));
+      if (item.onlyOne) return checks.map((text) => this.hasOnlyOne(item.onlyOne, text));
+      if (item.optional) return checks.map((text) => this.hasOptional(item.optional, text));
+      if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
+      if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
+      if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
     });
     return result.filter(this.withoutSkip).some(Boolean);
   }
 
   hasAnd(arr, text) {
+    const checks = Array.isArray(text) ? text : [text];
     const result = arr.flatMap((item) => {
-      if (item.and) return this.hasAnd(item.and, text);
-      if (item.or) return this.hasOr(item.or, text);
-      if (item.oneOrMore) return this.hasOneOrMore(item.oneOrMore, text);
-      if (item.optional) return this.hasOptional(item.optional, text);
-      if (item.zeroOrMore) return this.hasZeroOrMore(item.zeroOrMore, text);
-      if (item.onlyOne) return this.hasOnlyOne(item.onlyOne, text);
-      if (item.has) return this.has(item.has, text);
-      if (item.notHas) return this.notHas(item.notHas, text);
-      if (item.noChild) return this.hasNoChild(item.noChild, text);
-      if (item.oneOfChild) return this.hasOneOfChild(item.oneOfChild, text);
+      if (item.and) return checks.map((text) => this.hasAnd(item.and, text));
+      if (item.or) return checks.map((text) => this.hasOr(item.or, text));
+      if (item.oneOrMore) return checks.map((text) => this.hasOneOrMore(item.oneOrMore, text));
+      if (item.optional) return checks.map((text) => this.hasOptional(item.optional, text));
+      if (item.zeroOrMore) return checks.map((text) => this.hasZeroOrMore(item.zeroOrMore, text));
+      if (item.onlyOne) return checks.map((text) => this.hasOnlyOne(item.onlyOne, text));
+      if (item.has) return checks.map((text) => this.has(item.has, text));
+      if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
+      if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, text));
+      if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
     });
     return result.filter(this.withoutSkip).every(Boolean);
   }
