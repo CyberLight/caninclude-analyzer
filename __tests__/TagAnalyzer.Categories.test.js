@@ -243,16 +243,19 @@ describe('TagAnalyzer::Categories', () => {
         });
       });
 
-  it.each`
+  describe.each(['li', 'dt', 'dd', 'track', 'figcaption'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter            | expected
         ${undefined}         | ${[]}
         ${'#other-content'}  | ${[]}
-    `('Get categoties by $parameter for "li" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.li;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 
   it.each`
         parameter            | expected
@@ -269,43 +272,10 @@ describe('TagAnalyzer::Categories', () => {
 
   it.each`
         parameter            | expected
-        ${undefined}         | ${[]}
-        ${'#other-content'}  | ${[]}
-    `('Get categoties by $parameter for "dt" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.dt;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${[]}
-        ${'#other-content'}  | ${[]}
-    `('Get categoties by $parameter for "dd" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.dd;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
         ${undefined}         | ${['#flow-content-2', '#sectioning-root', '#palpable-content-2']}
         ${'#other-content'}  | ${['#flow-content-2', '#sectioning-root', '#palpable-content-2']}
     `('Get categoties by $parameter for "figure" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.figure;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${[]}
-        ${'#other-content'}  | ${[]}
-    `('Get categoties by $parameter for "figcaption" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.figcaption;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
@@ -496,17 +466,6 @@ describe('TagAnalyzer::Categories', () => {
   '#embedded-content-category']}
     `('Get categoties by $parameter for "audio" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.audio;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${[]}
-        ${'#other-content'}  | ${[]}
-    `('Get categoties by $parameter for "track" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.track;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
