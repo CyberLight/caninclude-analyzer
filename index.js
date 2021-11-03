@@ -122,9 +122,9 @@ class TagAnalyzer {
 
   has(o, text) {
     if (Array.isArray(o)) {
-      return new Set(o).has(text);
+      return new Set(o).has(this.normalize(text));
     }
-    return o == text;
+    return o == this.normalize(text);
   }
 
   ifthen(o) {
@@ -245,12 +245,13 @@ class TagAnalyzer {
 
   notHas(o, text) {
     if (Array.isArray(o)) {
-      return !new Set(o).has(text);
+      return !new Set(o).has(this.normalize(text));
     }
-    return o !== text;
+    return o !== this.normalize(text);
   }
 
   normalize(text) {
+    if (text === undefined || text === null) return text;
     if (Array.isArray(text)) {
       const filtered = text.filter((t) => !this.keywords.some((kw) => t.startsWith(kw)));
       if (filtered.length === 1) {
@@ -258,7 +259,7 @@ class TagAnalyzer {
       }
       return filtered;
     }
-    return text;
+    return this.keywords.reduce((result, kw) => result.startsWith(kw) ? result.replace(kw, '') : result, text);
   }
 
   hasKeyword(text) {
