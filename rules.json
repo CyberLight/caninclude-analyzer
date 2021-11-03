@@ -1381,7 +1381,7 @@
                 ],
                 "if": {
                     "and": [
-                        { "not": "#hidden-state-(type=hidden)" },
+                        { "notHas": "#hidden-state-(type=hidden)" },
                         { "has": "#attr-input-type" }
                     ],
                     "then": [
@@ -1395,10 +1395,7 @@
                         "#palpable-content-2"
                     ],
                     "elseif": {
-                        "has": [
-                            "#attr-input-type",
-                            "#hidden-state-(type=hidden)"
-                        ],
+                        "has": "#hidden-state-(type=hidden)",
                         "then": [
                             "#category-listed",
                             "#category-submit",
