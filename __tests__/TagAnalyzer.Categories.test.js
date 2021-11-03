@@ -416,16 +416,19 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
+  describe.each(['area', 'input'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter            | expected
         ${undefined}         | ${['#flow-content-2', '#phrasing-content-2']}
         ${'#other-content'}  | ${['#flow-content-2', '#phrasing-content-2']}
-    `('Get categoties by $parameter for "area" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.area;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 
   describe.each(['body', 'td'])(
       'For tag=%s', (tagName) => {
@@ -449,6 +452,34 @@ describe('TagAnalyzer::Categories', () => {
   '#interactive-content-2', '#palpable-content-2']}
     `('Get categoties by $parameter for "label" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.label;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
+
+  it.each`
+        parameter                                 | expected
+        ${undefined}                              | ${['#flow-content-2', '#phrasing-content-2']}
+        ${['hasAttr:#attr-input-type']}           | ${[
+  '#interactive-content-2',
+  '#category-listed',
+  '#category-label',
+  '#category-submit',
+  '#category-reset',
+  '#category-autocapitalize',
+  '#form-associated-element',
+  '#palpable-content-2',
+  '#flow-content-2',
+  '#phrasing-content-2']}
+        ${'hasAttr:#hidden-state-(type=hidden)'}  | ${['#category-listed',
+  '#category-submit',
+  '#category-reset',
+  '#category-autocapitalize',
+  '#form-associated-element',
+  '#flow-content-2',
+  '#phrasing-content-2']}
+    `('Get categoties by $parameter for "input" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.input;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
