@@ -638,4 +638,22 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                 | expected
+        ${undefined}                                              | ${false}
+        ${'#phrasing-content-2'}                                  | ${true}
+        ${'#labeled-control'}                                     | ${true}
+        ${'#category-label'}                                      | ${false}
+        ${'#the-label-element'}                                   | ${false}
+        ${['hasChild:#category-label', '#phrasing-content-2']}    | ${false}
+        ${['hasChild:#the-label-element', '#phrasing-content-2']} | ${false}
+        ${['hasChild:#category-label', '#labeled-control']}       | ${false}
+        ${['hasChild:#the-label-element', '#labeled-control']}    | ${false}
+    `('Can include $parameter to "label" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.label;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
