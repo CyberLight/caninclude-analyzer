@@ -81,17 +81,6 @@ describe('TagAnalyzer::Categories', () => {
 
   it.each`
         parameter            | expected
-        ${undefined}         | ${['#sectioning-root']}
-        ${'#other-content'}  | ${['#sectioning-root']}
-    `('Get categoties by $parameter for "body" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.body;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
         ${undefined}         | ${['#flow-content-2', '#sectioning-content-2', '#palpable-content-2']}
         ${'#other-content'}  | ${['#flow-content-2', '#sectioning-content-2', '#palpable-content-2']}
     `('Get categoties by $parameter for "article" tag result: $expected', ({parameter, expected}) => {
@@ -159,7 +148,7 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  describe.each(['header', 'footer'])(
+  describe.each(['header', 'footer', 'address', 'p', 'pre', 'main', 'div', 'table', 'form'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter            | expected
@@ -175,43 +164,10 @@ describe('TagAnalyzer::Categories', () => {
 
   it.each`
         parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "address" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.address;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "p" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.p;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
         ${undefined}         | ${['#flow-content-2']}
         ${'#other-content'}  | ${['#flow-content-2']}
     `('Get categoties by $parameter for "hr" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.hr;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "pre" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.pre;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
@@ -276,28 +232,6 @@ describe('TagAnalyzer::Categories', () => {
         ${'#other-content'}  | ${['#flow-content-2', '#sectioning-root', '#palpable-content-2']}
     `('Get categoties by $parameter for "figure" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.figure;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "main" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.main;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "div" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.div;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
@@ -493,25 +427,17 @@ describe('TagAnalyzer::Categories', () => {
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
 
-  it.each`
-        parameter            | expected
-        ${undefined}         | ${['#flow-content-2', '#palpable-content-2']}
-        ${'#other-content'}  | ${['#flow-content-2', '#palpable-content-2']}
-    `('Get categoties by $parameter for "table" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.table;
-
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
-
-  it.each`
+  describe.each(['body', 'td'])(
+      'For tag=%s', (tagName) => {
+        it.each`
         parameter            | expected
         ${undefined}         | ${['#sectioning-root']}
         ${'#other-content'}  | ${['#sectioning-root']}
-    `('Get categoties by $parameter for "td" tag result: $expected', ({parameter, expected}) => {
-    const tag = rules.td;
+    `(`Get categoties by $parameter for "${tagName}" tag result: $expected`, ({parameter, expected}) => {
+          const tag = rules[tagName];
 
-    const analyzer = new TagAnalyzer(tag);
-    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
-  });
+          const analyzer = new TagAnalyzer(tag);
+          expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+        });
+      });
 });
