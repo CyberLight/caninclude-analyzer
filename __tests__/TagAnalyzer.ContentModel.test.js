@@ -610,4 +610,19 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                          | expected
+        ${undefined}                       | ${false}
+        ${'#flow-content-2'}               | ${true}
+        ${'#the-header-element'}           | ${false}
+        ${'#the-footer-element'}           | ${false}
+        ${'#sectioning-content-2'}         | ${false}
+        ${'#heading-content-2'}            | ${false}
+    `('Can include $parameter to "th" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.th;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
