@@ -625,4 +625,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                            | expected
+        ${undefined}                                         | ${false}
+        ${'#flow-content-2'}                                 | ${true}
+        ${'#the-form-element'}                               | ${false}
+        ${['hasChild:#the-form-element', '#flow-content-2']} | ${false}
+    `('Can include $parameter to "form" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.form;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
