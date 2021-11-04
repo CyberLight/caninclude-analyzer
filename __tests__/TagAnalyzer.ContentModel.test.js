@@ -429,8 +429,8 @@ describe('TagAnalyzer::ContentModel', () => {
   it.each`
         parameter                                                    | expected
         ${'#text-content'}                                           | ${true}
-        ${['hasAttr:#attr-time-datetime', '#phrasing-content-2']}  | ${true}
-        ${['hasAttr:#attr-time-datetime', '#other-content']}       | ${false}
+        ${['hasAttr:#attr-time-datetime', '#phrasing-content-2']}    | ${true}
+        ${['hasAttr:#attr-time-datetime', '#other-content']}         | ${false}
         ${undefined}                                                 | ${false}
     `('Can include $parameter to "time" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.time;
@@ -546,8 +546,8 @@ describe('TagAnalyzer::ContentModel', () => {
         ${undefined}                                              | ${false}
         ${'#the-any-other-element'}                               | ${false}
         ${'#flow-content-2'}                                      | ${true}
-        ${'#the-table-element'}                                   | ${false}
-        ${['#the-table-element', '#flow-content-2']}              | ${false}
+        ${['hasChild:#the-table-element']}                        | ${false}
+        ${['hasChild:#the-table-element', '#flow-content-2']}     | ${false}
     `('Can include $parameter to "caption" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.caption;
 
@@ -707,6 +707,25 @@ describe('TagAnalyzer::ContentModel', () => {
         ${'#script-supporting-elements-2'}     | ${true}
     `('Can include $parameter to "optgroup" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.optgroup;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+
+
+  it.each`
+        parameter                                                                                    | expected
+        ${undefined}                                                                                 | ${false}
+        ${'#other-content'}                                                                          | ${false}
+        ${['hasAttr:#attr-option-label', 'hasAttr:#attr-option-value', '#concept-content-nothing']}  | ${true}
+        ${['hasAttr:#attr-option-label', '#text-content']}                                           | ${true}
+        ${['hasAttr:#attr-option-value', '#text-content']}                                           | ${true}
+        ${['hasAttr:#attr-option-value', 'not:#inter-element-whitespace']}                           | ${true}
+        ${['childOf:#the-datalist-element', '#text-content']}                                        | ${true}
+        ${['childOf:#the-datalist-element', 'hasAttr:#attr-option-value', '#text-content']}          | ${true}
+        ${['childOf:#the-div-element', 'hasAttr:#attr-option-value', '#text-content']}               | ${true}
+    `('Can include $parameter to "option" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.option;
 
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
