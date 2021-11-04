@@ -1238,8 +1238,8 @@
             "Categories": {},
             "ContentModel": {
               "and": [
-                { "default": "#flow-content-2" },
-                { "noChild": "#the-table-element" }
+                { "noChild": "#the-table-element" },
+                { "default": "#flow-content-2" }
               ]
             }
         }
@@ -1491,36 +1491,42 @@
         "rules": {
             "Categories": {},
             "ContentModel": {
-                "if0": {
+                "if": {
                     "and": [
-                        "#attr-option-label",
-                        "#attr-option-value"
+                        { "has": "#attr-option-label" },
+                        { "has": "#attr-option-value" }
                     ],
                     "then": [
-                        "#concept-content-nothing",
-                        "#text-content"
+                        "#concept-content-nothing"
                     ],
                     "elseif": {
                         "and": [
-                            {
-                                "hasNo": "#attr-option-label"
-                            },
-                            {
-                                "notChildOf": "#the-datalist-element"
-                            }
+                          { "has": "#attr-option-label" },
+                          { "notHas": "#attr-option-value" }
                         ],
-                        "then": "#text-content",
-                        "andThen": {
-                            "isNot": "#inter-element-whitespace"
+                        "then": [
+                            "#text-content"
+                        ],
+                        "elseif": {
+                            "and": [
+                                { "notHas": "#attr-option-label" },
+                                { "notChildOf": "#the-datalist-element" }
+                            ],
+                            "then": [
+                              "#text-content",
+                              "not:#inter-element-whitespace"
+                            ],
+                            "elseif": {
+                                "and": [
+                                    { "notHas": "#attr-option-label" },
+                                    { "childOf": "#the-datalist-element" }
+                                ],
+                                "then": [
+                                  "#text-content"
+                                ]
+                            }
                         }
                     }
-                },
-                "if1": {
-                    "and": [
-                        { "hasNo": "#attr-option-label" },
-                        { "isChildOf": "#the-datalist-element" }
-                    ],
-                    "then": "#text-content"
                 }
             }
         }
