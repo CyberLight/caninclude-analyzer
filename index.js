@@ -56,6 +56,20 @@ class TagAnalyzer {
     return new Set([o]).has(text);
   }
 
+  hasChildOf(o, text) {
+    if (Array.isArray(o)) {
+      return new Set(o).has(text);
+    }
+    return new Set([o]).has(text);
+  }
+
+  notChildOf(o, text) {
+    if (Array.isArray(o)) {
+      return !new Set(o).has(text);
+    }
+    return !new Set([o]).has(text);
+  }
+
   or(arr) {
     return arr.flatMap((item) => {
       if (item.zeroOrMore) return this.zeroOrMore(item.zeroOrMore);
@@ -75,11 +89,11 @@ class TagAnalyzer {
     });
   }
 
-  hasOr(arr, text) {
+  hasOr(arr, {condition, text} = {}) {
     const checks = Array.isArray(text) ? text : [text];
     const result = arr.flatMap((item) => {
-      if (item.and) return checks.map((text) => this.hasAnd(item.and, text));
-      if (item.or) return checks.map((text) => this.hasOr(item.or, text));
+      if (item.and) return checks.map((text) => this.hasAnd(item.and, {condition, text}));
+      if (item.or) return checks.map((text) => this.hasOr(item.or, {condition, text}));
       if (item.zeroOrMore) return checks.map((text) => this.hasZeroOrMore(item.zeroOrMore, text));
       if (item.oneOrMore) return checks.map((text) => this.hasOneOrMore(item.oneOrMore, text));
       if (item.onlyOne) return checks.map((text) => this.hasOnlyOne(item.onlyOne, text));
@@ -87,24 +101,28 @@ class TagAnalyzer {
       if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
       if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
+      if (item.hasChildOf) return checks.map((text) => this.hasChildOf(item.hasChildOf, text));
+      if (item.notChildOf) return checks.map((text) => this.notChildOf(item.notChildOf, text));
     });
     return result.filter(this.withoutSkip).some(Boolean);
   }
 
-  hasAnd(arr, text) {
+  hasAnd(arr, {condition, text} = {}) {
     const checks = Array.isArray(text) ? text : [text];
     const result = arr.flatMap((item) => {
-      if (item.and) return checks.map((text) => this.hasAnd(item.and, text));
-      if (item.or) return checks.map((text) => this.hasOr(item.or, text));
+      if (item.and) return checks.map((text) => this.hasAnd(item.and, {condition, text}));
+      if (item.or) return checks.map((text) => this.hasOr(item.or, {condition, text}));
       if (item.oneOrMore) return checks.map((text) => this.hasOneOrMore(item.oneOrMore, text));
       if (item.optional) return checks.map((text) => this.hasOptional(item.optional, text));
       if (item.zeroOrMore) return checks.map((text) => this.hasZeroOrMore(item.zeroOrMore, text));
       if (item.onlyOne) return checks.map((text) => this.hasOnlyOne(item.onlyOne, text));
-      if (item.has) return checks.map((text) => this.has(item.has, text));
+      if (item.has) return checks.map((text) => this.has(item.has, condition || text));
       if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
-      if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, text));
+      if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, condition || text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
       if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
+      if (item.hasChildOf) return checks.map((text) => this.hasChildOf(item.hasChildOf, text));
+      if (item.notChildOf) return checks.map((text) => this.notChildOf(item.notChildOf, text));
     });
     return result.filter(this.withoutSkip).every(Boolean);
   }
@@ -122,7 +140,14 @@ class TagAnalyzer {
 
   has(o, text) {
     if (Array.isArray(o)) {
+      if (Array.isArray(text)) {
+        return text.some((t) => new Set(o).has(this.normalize(t)));
+      }
       return new Set(o).has(this.normalize(text));
+    }
+
+    if (Array.isArray(text)) {
+      return text.some((t) => new Set([o]).has(this.normalize(t)));
     }
     return o == this.normalize(text);
   }
@@ -141,16 +166,15 @@ class TagAnalyzer {
     return [o];
   }
 
-  childOf(o, text) {
-    if (Array.isArray(text)) {
-      const childOfPattern = 'childOf:';
-      const [childOf] = text.filter((o) => o.startsWith(childOfPattern));
-      if (String(childOf).replace(childOfPattern, '') === o.childOf) {
+  childOf(o, {condition, text}) {
+    const check = condition || text;
+    if (Array.isArray(check)) {
+      if (check.some((v) => v === o.childOf)) {
         return this.ifthen(o.then);
       } else if (o.else) {
         return this.ifelse(o.else);
       }
-    } else if (text === o.childOf) {
+    } else if (check === o.childOf) {
       return this.ifthen(o.then);
     } else if (o.else) {
       return this.ifelse(o.else);
@@ -158,9 +182,9 @@ class TagAnalyzer {
     return [];
   }
 
-  ifCond(o, text) {
+  ifCond(o, {condition, text} = {}) {
     if (o.childOf) {
-      return this.childOf(o, text);
+      return this.childOf(o, {condition, text});
     }
     if (o.is) {
       if (o.is === text) {
@@ -170,32 +194,33 @@ class TagAnalyzer {
     if (o.hasOne && this.hasOne(o.hasOne, text)) {
       return this.ifthen(o.then);
     }
-    if (o.has && this.has(o.has, text)) {
-      return this.ifthen(o.then);
+    if (o.has) {
+      if (this.has(o.has, condition || text)) {
+        return this.ifthen(o.then);
+      } if (o.else) {
+        return this.ifelse(o.else);
+      }
     }
     if (o.not && this.not(o, text)) {
       if (o.then) return this.ifthen(o.then);
-    }
-    if (o.else) {
-      return this.ifelse(o.else);
     }
     if (o.zeroOrMore && this.hasZeroOrMore(o.zeroOrMore, text)) {
       return this.ifthen(o.then);
     }
     if (o.or) {
-      const result = this.hasOr(o.or, text);
+      const result = this.hasOr(o.or, {condition, text});
       if (o.then && result) {
         return this.ifthen(o.then);
       } else if (o.elseif && !result) {
-        return this.ifCond(o.elseif, text);
+        return this.ifCond(o.elseif, {condition, text});
       }
     }
     if (o.and) {
-      const result = this.hasAnd(o.and, text);
+      const result = this.hasAnd(o.and, {condition, text});
       if (o.then && result) {
         return this.ifthen(o.then);
       } else if (o.elseif && !result) {
-        return this.ifCond(o.elseif, text);
+        return this.ifCond(o.elseif, {condition, text});
       }
     }
     return [];
@@ -238,7 +263,13 @@ class TagAnalyzer {
 
   hasNoChild(o, text) {
     if (Array.isArray(o)) {
+      if (Array.isArray(text)) {
+        return text.every((t) => !new Set(o).has(t));
+      }
       return !new Set(o).has(text);
+    }
+    if (Array.isArray(text)) {
+      return text.every((t) => !new Set([o]).has(t));
     }
     return o !== text;
   }
@@ -272,14 +303,20 @@ class TagAnalyzer {
 
   parseText(text) {
     if (Array.isArray(text)) {
-      return text.reduce((result, item) => {
+      const result = text.reduce((result, item) => {
         if (this.hasKeyword(item)) {
-          result.condition = this.cleanFromKeywords(item);
+          result.condition.push(this.cleanFromKeywords(item));
         } else {
           result.text = item;
         }
         return result;
-      }, {condition: undefined, text: undefined});
+      }, {condition: [], text: undefined});
+
+      if (!result.condition.length) {
+        result.condition = undefined;
+      }
+
+      return result;
     }
     return {condition: undefined, text};
   }
@@ -298,7 +335,8 @@ class TagAnalyzer {
     let tagCategories = [];
 
     if (ifCond) {
-      tagCategories = tagCategories.concat(this.ifCond(ifCond, text));
+      const parsed = this.parseText(text);
+      tagCategories = tagCategories.concat(this.ifCond(ifCond, parsed));
     }
 
     if (defaultCond) {
@@ -334,16 +372,16 @@ class TagAnalyzer {
     }
 
     if (or) {
-      return this.hasOr(or, text);
+      return this.hasOr(or, this.parseText(text));
     }
 
     if (and) {
-      return this.hasAnd(and, text);
+      return this.hasAnd(and, this.parseText(text));
     }
 
     if (ifCond) {
-      const {condition, text: actualText} = this.parseText(text);
-      const ifCondSet = new Set(this.ifCond(ifCond, condition || actualText));
+      const parsed = this.parseText(text);
+      const ifCondSet = new Set(this.ifCond(ifCond, parsed));
       if (this.isTransparent(ifCondSet)) {
         return TagAnalyzerUnknown;
       }
