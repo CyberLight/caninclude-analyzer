@@ -1470,7 +1470,7 @@
             },
             "ContentModel": {
                 "or": [
-                    { "has": "phrasing content" },
+                    { "optional": "#phrasing-content-2" },
                     { "zeroOrMore": [ "#the-option-element", "#script-supporting-elements-2" ] }
                 ]
             }
