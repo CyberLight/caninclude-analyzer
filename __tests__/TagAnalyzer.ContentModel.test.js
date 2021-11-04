@@ -698,4 +698,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                              | expected
+        ${undefined}                           | ${false}
+        ${'#other-content'}                    | ${false}
+        ${'#the-option-element'}               | ${true}
+        ${'#script-supporting-elements-2'}     | ${true}
+    `('Can include $parameter to "optgroup" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.optgroup;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
