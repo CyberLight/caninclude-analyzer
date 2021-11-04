@@ -657,4 +657,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                              | expected
+        ${undefined}                           | ${false}
+        ${'#phrasing-content-2'}               | ${true}
+        ${'#interactive-content-2'}            | ${false}
+        ${'#attr-tabindex'}                    | ${false}
+    `('Can include $parameter to "button" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.button;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
