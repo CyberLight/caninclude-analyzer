@@ -1582,8 +1582,10 @@
                 ]
             },
             "ContentModel": {
-                "default": "#phrasing-content-2",
-                "butNo": "#the-progress-element"
+              "and": [
+                { "default": "#phrasing-content-2" },
+                { "noChild": "#the-progress-element" }
+              ]
             }
         }
     },
