@@ -1620,7 +1620,7 @@
                 ]
             },
             "ContentModel": {
-                "group": [
+                "or": [
                     { "optional": "#the-legend-element" },
                     { "zeroOrMore": "#flow-content-2" }
                 ]
