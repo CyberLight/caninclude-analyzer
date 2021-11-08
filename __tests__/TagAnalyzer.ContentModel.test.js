@@ -742,4 +742,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                 | expected
+        ${'#phrasing-content-2'}  | ${true}
+        ${undefined}              | ${false}
+        ${'#other-content'}       | ${false}
+    `('Can include $parameter to "output" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.output;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
