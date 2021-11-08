@@ -768,4 +768,18 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                  | expected
+        ${'#phrasing-content-2'}                                   | ${true}
+        ${'#the-meter-element'}                                    | ${false}
+        ${['hasChild:#the-meter-element', '#phrasing-content-2']}  | ${false}
+        ${undefined}                                               | ${false}
+        ${'#other-content'}                                        | ${false}
+    `('Can include $parameter to "meter" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.meter;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
