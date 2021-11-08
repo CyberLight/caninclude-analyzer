@@ -834,4 +834,19 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                 | expected
+        ${['hasAttr:#attr-script-src', '#text-content-comment']}  | ${true}
+        ${['hasAttr:#attr-script-src', '#text-content']}          | ${false}
+        ${'#text-content-comment'}                                | ${true}
+        ${'#text-content'}                                        | ${true}
+        ${undefined}                                              | ${false}
+        ${'#other-content'}                                       | ${false}
+    `('Can include $parameter to "script" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.script;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
