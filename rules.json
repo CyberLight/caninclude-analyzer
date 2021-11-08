@@ -1732,8 +1732,7 @@
                 ]
             },
             "ContentModel": {
-                "default": "#concept-content-nothing",
-                "forClarification": "#template-example"
+                "default": "#concept-content-nothing"
             }
         }
     },
