@@ -822,4 +822,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                   | expected
+        ${'#flow-content-2'}        | ${true}
+        ${undefined}                | ${false}
+        ${'#other-content'}         | ${false}
+    `('Can include $parameter to "dialog" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.dialog;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });

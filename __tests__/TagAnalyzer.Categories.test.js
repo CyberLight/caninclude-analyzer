@@ -621,4 +621,14 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#flow-content-2', '#sectioning-root']}
+    `('Get categoties by $parameter for "dialog" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.dialog;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
