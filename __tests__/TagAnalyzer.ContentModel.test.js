@@ -795,4 +795,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                  | expected
+        ${'#phrasing-content-2'}                                   | ${true}
+        ${'#heading-content-2'}                                    | ${true}
+        ${undefined}                                               | ${false}
+        ${'#other-content'}                                        | ${false}
+    `('Can include $parameter to "legend" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.legend;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });

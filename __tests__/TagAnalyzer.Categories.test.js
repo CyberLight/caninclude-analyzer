@@ -199,7 +199,7 @@ describe('TagAnalyzer::Categories', () => {
         });
       });
 
-  describe.each(['li', 'dt', 'dd', 'track', 'figcaption', 'th', 'optgroup', 'option'])(
+  describe.each(['li', 'dt', 'dd', 'track', 'figcaption', 'th', 'optgroup', 'option', 'legend'])(
       'For tag=%s', (tagName) => {
         it.each`
         parameter            | expected
