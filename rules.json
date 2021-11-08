@@ -1682,17 +1682,9 @@
             },
             "ContentModel": {
                 "if": {
-                    "and": [
-                        { "hasNo": "#attr-script-src" },
-                        { "dependsOn": "#attr-script-type" }
-                    ],
-                    "then": {
-                        "mustMatch": "#restrictions-for-contents-of-script-elements"
-                    },
-                    "else": {
-                        "containOnly": "#inline-documentation-for-external-scripts",
-                        "mustMatch": "#restrictions-for-contents-of-script-elements"
-                    }
+                    "has": "#attr-script-src",
+                    "then": "#text-content-comment",
+                    "else": ["#text-content-comment", "#text-content"]
                 }
             }
         }
