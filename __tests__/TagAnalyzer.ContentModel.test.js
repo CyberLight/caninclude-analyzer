@@ -849,4 +849,24 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                                                    | expected
+        ${['is:#concept-n-noscript']}                                                                | ${'unknown'}
+        ${['childOf:#the-head-element', 'is:#concept-n-noscript', '#the-link-element']}              | ${true}
+        ${['childOf:#the-head-element', 'is:#concept-n-noscript', '#the-style-element']}             | ${true}
+        ${['childOf:#the-head-element', 'is:#concept-n-noscript', '#the-meta-element']}              | ${true}
+        ${['childOf:#the-head-element', 'is:#concept-n-noscript', '#the-div-element']}               | ${false}
+        ${undefined}                                                                                 | ${false}
+        ${'#other-content'}                                                                          | ${false}
+        ${'#the-noscript-element'}                                                                   | ${false}
+        ${['is:#concept-n-noscript', 'hasChild:#the-noscript-element']}                              | ${false}
+        ${['is:#concept-n-noscript', 'hasChild:#the-noscript-element', 'childOf:#the-head-element']} | ${false}
+        ${['is:#concept-n-noscript', 'childOf:#the-head-element']}                                   | ${false}
+    `('Can include $parameter to "noscript" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.noscript;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
