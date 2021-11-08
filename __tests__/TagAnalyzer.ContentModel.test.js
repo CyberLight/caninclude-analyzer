@@ -782,4 +782,17 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                  | expected
+        ${'#the-legend-element'}                                   | ${true}
+        ${'#flow-content-2'}                                       | ${true}
+        ${undefined}                                               | ${false}
+        ${'#other-content'}                                        | ${false}
+    `('Can include $parameter to "fieldset" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.fieldset;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });

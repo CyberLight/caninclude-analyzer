@@ -593,4 +593,19 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#flow-content-2',
+  '#sectioning-root',
+  '#category-listed',
+  '#category-autocapitalize',
+  '#form-associated-element',
+  '#palpable-content-2']}
+    `('Get categoties by $parameter for "fieldset" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.fieldset;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });
