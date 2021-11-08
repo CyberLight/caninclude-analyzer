@@ -8,7 +8,7 @@ const TagAnalyzerSkipResult = 'skip';
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
-    this.keywords = ['hasChild:', 'childOf:', 'hasAttr:', 'is:'];
+    this.keywords = ['hasChild:', 'childOf:', 'hasAttr:', 'is:', 'tag:'];
   }
 
   withoutSkip(v) {
@@ -133,6 +133,7 @@ class TagAnalyzer {
       if (item.notChildOf) return checks.map((text) => this.notChildOf(item.notChildOf, text));
       if (item.notHasChild) return checks.map((text) => this.notHasChild(item.notHasChild, condition || text));
       if (item.is) return checks.map((text) => this.hasIs(item.is, text));
+      if (item.has) return checks.map((text) => this.has(item.has, condition || text));
     });
     return result.filter(this.withoutSkip).some(Boolean);
   }
@@ -229,8 +230,10 @@ class TagAnalyzer {
     if (o.has) {
       if (this.has(o.has, condition || text)) {
         return this.ifthen(o.then);
-      } if (o.else) {
+      } else if (o.else) {
         return this.ifelse(o.else);
+      } else if (o.elseif) {
+        return this.ifCond(o.elseif, {condition, text});
       }
     }
     if (o.not && this.not(o, text)) {
@@ -245,6 +248,8 @@ class TagAnalyzer {
         return this.ifthen(o.then);
       } else if (o.elseif && !result) {
         return this.ifCond(o.elseif, {condition, text});
+      } else if (o.else && !result) {
+        return this.ifelse(o.else);
       }
     }
     if (o.and) {
@@ -253,6 +258,8 @@ class TagAnalyzer {
         return this.ifthen(o.then);
       } else if (o.elseif && !result) {
         return this.ifCond(o.elseif, {condition, text});
+      } else if (o.else && !result) {
+        return this.ifelse(o.else);
       }
     }
     return [];
