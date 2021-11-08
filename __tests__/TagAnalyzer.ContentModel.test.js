@@ -892,4 +892,30 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  /* eslint-disable max-len */
+  it.each`
+        parameter                                                                                           | expected
+        ${undefined}                                                                                        | ${'unknown'}
+        ${'#other-content'}                                                                                 | ${'unknown'}
+        ${'#the-button-element'}                                                                            | ${true}
+        ${['tag:#the-button-element', '#the-button-element']}                                               | ${true}
+        ${'#the-a-element'}                                                                                 | ${true}
+        ${['tag:#the-a-element', '#the-a-element']}                                                         | ${true}
+        ${['tag:#the-img-element', 'hasAttr:#attr-hyperlink-usemap', '#the-img-element']}                   | ${true}
+        ${'#the-input-element'}                                                                             | ${'unknown'}
+        ${['tag:#the-input-element', 'hasAttr:#checkbox-state-(type=checkbox)', '#the-input-element']}      | ${true}
+        ${['tag:#the-input-element', 'hasAttr:#radio-button-state-(type=radio)', '#the-input-element']}     | ${true}
+        ${['tag:#the-input-element', 'is:#concept-button', '#the-input-element']}                           | ${true}
+        ${'#the-select-element'}                                                                            | ${'unknown'}
+        ${['tag:#the-select-element', 'hasAttr:#attr-select-multiple', '#the-select-element']}              | ${true}
+        ${['tag:#the-select-element', 'hasAttr:#attr-select-size', '#the-select-element']}                  | ${true}
+        ${['tag:#the-select-element', 'hasAttr:#concept-select-size', '#the-select-element']}                  | ${true}
+    `('Can include $parameter to "canvas" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.canvas;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
+  /* eslint-enable max-len */
 });
