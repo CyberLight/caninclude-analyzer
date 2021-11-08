@@ -808,4 +808,18 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                    | expected
+        ${'#the-summary-element'}                                    | ${true}
+        ${['hasChild:#the-summary-element', '#flow-content-2']}      | ${true}
+        ${['hasChild:#the-summary-element', '#other-content']}       | ${false}
+        ${undefined}                                                 | ${false}
+        ${'#other-content'}                                          | ${false}
+    `('Can include $parameter to "details" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.details;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
