@@ -1760,30 +1760,61 @@
                 ]
             },
             "ContentModel": {
-                "default": "#transparent",
-                "but": {
-                    "not": "#interactive-content-2",
-                    "except": [
-                        "#the-a-element",
-                        "#the-img-element",
-                        "#attr-hyperlink-usemap",
-                        "#the-button-element",
-                        "#the-input-element",
-                        { "or": [
-                            { "has": "#attr-input-type", "in": "#checkbox-state-(type=checkbox)" },
+                "if": {
+                  "has": "#the-a-element",
+                  "then": [
+                    "#the-a-element"
+                  ],
+                  "elseif": {
+                    "and": [
+                      { "has": "#the-img-element" },
+                      { "has": "#attr-hyperlink-usemap" }
+                    ],
+                    "then": [
+                      "#the-img-element"
+                    ],
+                    "elseif": {
+                      "has": "#the-button-element",
+                      "then": [
+                        "#the-button-element"
+                      ],
+                      "elseif": {
+                        "and": [
+                          { "has": "#the-input-element" },
+                          { "or": [
+                            { "has": "#checkbox-state-(type=checkbox)" },
                             { "has": "#radio-button-state-(type=radio)" }
-                        ]},
-                        { "if": "#the-input-element", "is": "#concept-button" },
-                        { "or": [
-                            {
-                                "if": "#the-select-element",
-                                "withA": "#attr-select-multiple"
-                            },
-                            {
-                                "oneOrMore": "#concept-select-size"
-                            }
-                        ]}
-                    ]
+                          ]}
+                        ],
+                        "then": [
+                          "#the-input-element"
+                        ],
+                        "elseif": {
+                          "and": [
+                            { "has": "#the-input-element" },
+                            { "has": "#concept-button" }
+                          ],
+                          "then": [
+                            "#the-input-element"
+                          ],
+                          "elseif": {
+                            "and": [
+                              { "has": "#the-select-element" },
+                              { "or": [
+                                { "has": "#attr-select-multiple" },
+                                { "has": "#attr-select-size" },
+                                { "has": "#concept-select-size" }
+                              ]}
+                            ],
+                            "then": [
+                              "#the-select-element"
+                            ],
+                            "else": "#transparent"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
             }
         }
