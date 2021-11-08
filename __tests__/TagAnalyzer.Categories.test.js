@@ -567,4 +567,17 @@ describe('TagAnalyzer::Categories', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter            | expected
+        ${undefined}         | ${['#flow-content-2',
+  '#phrasing-content-2',
+  '#category-label',
+  '#palpable-content-2']}
+    `('Get categoties by $parameter for "progress" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.progress;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.getCategories(parameter)).toStrictEqual(expected);
+  });
 });

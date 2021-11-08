@@ -754,4 +754,18 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                     | expected
+        ${'#phrasing-content-2'}                                      | ${true}
+        ${'#the-progress-element'}                                    | ${false}
+        ${['hasChild:#the-progress-element', '#phrasing-content-2']}  | ${false}
+        ${undefined}                                                  | ${false}
+        ${'#other-content'}                                           | ${false}
+    `('Can include $parameter to "progress" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.progress;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
