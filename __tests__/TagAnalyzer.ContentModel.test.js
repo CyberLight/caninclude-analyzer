@@ -730,4 +730,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter           | expected
+        ${'#text-content'}  | ${true}
+        ${undefined}        | ${false}
+        ${'#other-content'} | ${false}
+    `('Can include $parameter to "textarea" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.textarea;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
