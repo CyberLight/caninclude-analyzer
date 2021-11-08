@@ -869,4 +869,16 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                  | expected
+        ${'#concept-content-nothing'}                              | ${true}
+        ${undefined}                                               | ${false}
+        ${'#other-content'}                                        | ${false}
+    `('Can include $parameter to "template" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.template;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
