@@ -1600,8 +1600,10 @@
                 ]
             },
             "ContentModel": {
-                "default": "#phrasing-content-2",
-                "butNo": "#the-meter-element"
+              "and":[
+                { "default": "#phrasing-content-2" },
+                { "noChild": "#the-meter-element" }
+              ]
             }
         }
     },
