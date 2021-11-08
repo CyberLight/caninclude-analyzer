@@ -1702,21 +1702,20 @@
                 "if": {
                     "and": [
                         { "is": "#concept-n-noscript" },
-                        { "isChildOf": "#the-head-element" }
+                        { "childOf": "#the-head-element" }
                     ],
-                    "then": {
-                        "zeroOrMore": [
-                            "#the-link-element",
-                            "#the-style-element",
-                            "#the-meta-element"
-                        ]
-                    },
+                    "then": [
+                        "#the-link-element",
+                        "#the-style-element",
+                        "#the-meta-element"
+                    ],
                     "elseif": {
-                        "notIsChildOf": "#the-head-element",
-                        "then": {
-                            "default": "#transparent",
-                            "butNo": "#the-noscript-element"
-                        }
+                        "and": [
+                          { "is": "#concept-n-noscript" },
+                          { "notChildOf": "#the-head-element" },
+                          { "notHasChild": "#the-noscript-element" }
+                        ],
+                        "then": "#transparent"
                     }
                 }
             }
