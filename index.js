@@ -8,7 +8,7 @@ const TagAnalyzerSkipResult = 'skip';
 class TagAnalyzer {
   constructor(tagMetadata) {
     this.tagMetadata = tagMetadata;
-    this.keywords = ['hasChild:', 'childOf:', 'hasAttr:'];
+    this.keywords = ['hasChild:', 'childOf:', 'hasAttr:', 'is:'];
   }
 
   withoutSkip(v) {
@@ -56,11 +56,25 @@ class TagAnalyzer {
     return new Set([o]).has(text);
   }
 
-  hasChildOf(o, text) {
-    if (Array.isArray(o)) {
-      return new Set(o).has(text);
+  isChildOf(o, text) {
+    if (Array.isArray(text)) {
+      return text.some((v) => v === o);
     }
-    return new Set([o]).has(text);
+    return text === o;
+  }
+
+  notHasChild(o, text) {
+    if (Array.isArray(o)) {
+      if (Array.isArray(text)) {
+        return !text.some((t) => new Set(o).has(this.normalize(t)));
+      }
+      return !new Set(o).has(this.normalize(text));
+    }
+
+    if (Array.isArray(text)) {
+      return !text.some((t) => new Set([o]).has(this.normalize(t)));
+    }
+    return o !== this.normalize(text);
   }
 
   notChildOf(o, text) {
@@ -68,6 +82,20 @@ class TagAnalyzer {
       return !new Set(o).has(text);
     }
     return !new Set([o]).has(text);
+  }
+
+  hasIs(o, text) {
+    if (Array.isArray(o)) {
+      if (Array.isArray(text)) {
+        return text.some((t) => new Set(o).has(this.normalize(t)));
+      }
+      return new Set(o).has(this.normalize(text));
+    }
+
+    if (Array.isArray(text)) {
+      return text.some((t) => new Set([o]).has(this.normalize(t)));
+    }
+    return o == this.normalize(text);
   }
 
   or(arr) {
@@ -101,8 +129,10 @@ class TagAnalyzer {
       if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
       if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
-      if (item.hasChildOf) return checks.map((text) => this.hasChildOf(item.hasChildOf, text));
+      if (item.childOf) return checks.map((text) => this.isChildOf(item.childOf, condition || text));
       if (item.notChildOf) return checks.map((text) => this.notChildOf(item.notChildOf, text));
+      if (item.notHasChild) return checks.map((text) => this.notHasChild(item.notHasChild, condition || text));
+      if (item.is) return checks.map((text) => this.hasIs(item.is, text));
     });
     return result.filter(this.withoutSkip).some(Boolean);
   }
@@ -121,8 +151,10 @@ class TagAnalyzer {
       if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, condition || text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
       if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
-      if (item.hasChildOf) return checks.map((text) => this.hasChildOf(item.hasChildOf, text));
+      if (item.childOf) return checks.map((text) => this.isChildOf(item.childOf, condition || text));
       if (item.notChildOf) return checks.map((text) => this.notChildOf(item.notChildOf, text));
+      if (item.notHasChild) return checks.map((text) => this.notHasChild(item.notHasChild, condition || text));
+      if (item.is) return checks.map((text) => this.hasIs(item.is, condition || text));
     });
     return result.filter(this.withoutSkip).every(Boolean);
   }
