@@ -881,4 +881,15 @@ describe('TagAnalyzer::ContentModel', () => {
     const analyzer = new TagAnalyzer(tag);
     expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
   });
+
+  it.each`
+        parameter                                                  | expected
+        ${undefined}                                               | ${'unknown'}
+        ${'#other-content'}                                        | ${'unknown'}
+    `('Can include $parameter to "slot" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.slot;
+
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canIncludeParam(parameter)).toStrictEqual(expected);
+  });
 });
