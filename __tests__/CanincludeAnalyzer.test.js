@@ -22,11 +22,11 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
   });
 
-
   it.each`
         child                                                    | parent              | expected
         ${{name: 'a', params: ['hasAttr:#attr-hyperlink-href']}} | ${{name: 'button'}} | ${false}
         ${{name: 'a'}}                                           | ${{name: 'button'}} | ${true}
+        ${{name: 'a'}}                                           | ${{name: 'a'}}      | ${false}
     `('Can include $child to $parent tag result: $expected', ({parent, child, expected}) => {
     expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
   });
