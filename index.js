@@ -1,9 +1,11 @@
 /* eslint-disable require-jsdoc */
 const {readFile} = require('fs');
+const path = require('path');
 
 const TagAnalyzerUnknown = 'unknown';
 const TagAnalyzerTransparent = '#transparent';
 const TagAnalyzerSkipResult = 'skip';
+const DefaultRulesPath = path.join(process.cwd(), 'rules.json');
 
 class TagAnalyzer {
   constructor(tagMetadata) {
@@ -389,8 +391,8 @@ class TagAnalyzer {
     return [...new Set(tagCategories)];
   }
 
-  canIncludeParam(text) {
-    const {ContentModel} = this.tagMetadata.rules;
+  canInclude(text) {
+    const {ContentModel, ContentModelPriority} = this.tagMetadata.rules;
     const {
       onlyOne,
       zeroOrMore,
@@ -444,13 +446,26 @@ class TagAnalyzer {
 
     return false;
   }
+
+  getPriority(paramName) {
+    const {ContentModelPriority} = this.tagMetadata.rules;
+    if (ContentModelPriority) {
+      if (typeof ContentModelPriority[paramName] === 'number') {
+        return ContentModelPriority[paramName];
+      }
+    }
+    return undefined;
+  }
 }
 
 class CanincludeAnalyzer {
-  constructor() {
+  constructor(rulesPath = DefaultRulesPath) {
     this.controller = new AbortController();
     this.signal = this.controller.signal;
     this.loading = false;
+    this.rules = null;
+    this.loaded = false;
+    this.rulesPath = rulesPath;
   }
 
   async load() {
@@ -462,15 +477,48 @@ class CanincludeAnalyzer {
       }
       this.loading = true;
       const {signal} = this;
-      readFile('./rules.json', {signal}, (err, buf) => {
+      readFile(this.rulesPath, {signal}, (err, buf) => {
         if (err) return reject(err);
         resolve(JSON.parse(buf));
       });
+    }).then((rules) => {
+      this.rules = rules;
+      this.loaded = true;
+    }).catch(() => {
+      this.loaded = false;
     });
   }
 
-  analyze(childTagName, parentTagName) {
+  analyze(childTagInfo, parentTagInfo) {
+    if (!this.loaded) throw new Error('[CanincludeAnalyzer] Rules were not loaded.');
+    const childMeta = this.rules[childTagInfo.name];
+    const parentMeta = this.rules[parentTagInfo.name];
+    const childTag = new TagAnalyzer(childMeta);
+    const parentTag = new TagAnalyzer(parentMeta);
+    const catagories = childTag.getCategories(childTagInfo.params);
+    const result = catagories.reduce((accum, category) => {
+      const priority = parentTag.getPriority(category);
+      if (typeof priority !== 'undefined') {
+        return accum.concat([[category, {can: parentTag.canInclude(category), priority}]]);
+      }
+      return accum;
+    }, []);
+    return result;
+  }
 
+  canInclude(childTagInfo, parentTagInfo) {
+    const result = this.analyze(childTagInfo, parentTagInfo);
+    if (!result.length) return false;
+    const prioritySums = result.reduce((sums, [, {can, priority}]) => {
+      sums[can] = sums[can] || 0;
+      sums[can] += priority;
+      return sums;
+    }, {});
+    const sortedByPriority = Object.entries(prioritySums).sort((l, r) => r[1] - l[1]);
+    const maxPriorityResult = sortedByPriority[0][0];
+    if (maxPriorityResult === 'false') return false;
+    if (maxPriorityResult === 'true') return true;
+    return maxPriorityResult;
   }
 }
 
