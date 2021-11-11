@@ -392,7 +392,7 @@ class TagAnalyzer {
   }
 
   canInclude(text) {
-    const {ContentModel, ContentModelPriority} = this.tagMetadata.rules;
+    const {ContentModel} = this.tagMetadata.rules;
     const {
       onlyOne,
       zeroOrMore,
@@ -454,7 +454,7 @@ class TagAnalyzer {
         return ContentModelPriority[paramName];
       }
     }
-    return undefined;
+    return 0;
   }
 }
 
@@ -496,12 +496,12 @@ class CanincludeAnalyzer {
     const childTag = new TagAnalyzer(childMeta);
     const parentTag = new TagAnalyzer(parentMeta);
     const catagories = childTag.getCategories(childTagInfo.params);
+    catagories.push(`#the-${childTagInfo.name}-element`);
     const result = catagories.reduce((accum, category) => {
-      const priority = parentTag.getPriority(category);
-      if (typeof priority !== 'undefined') {
-        return accum.concat([[category, {can: parentTag.canInclude(category), priority}]]);
-      }
-      return accum;
+      return accum.concat([[category, {
+        can: parentTag.canInclude(category),
+        priority: parentTag.getPriority(category),
+      }]]);
     }, []);
     return result;
   }
