@@ -1099,7 +1099,8 @@
                     "#flow-content-2",
                     "#phrasing-content-2",
                     "#embedded-content-category",
-                    "#palpable-content-2"
+                    "#palpable-content-2",
+                    "#media-element"
                 ],
                 "if": {
                     "has": "#attr-media-controls",
@@ -1126,6 +1127,9 @@
                       "then": "#transparent"
                   }
                 }
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1135,7 +1139,8 @@
                 "default": [
                     "#flow-content-2",
                     "#phrasing-content-2",
-                    "#embedded-content-category"
+                    "#embedded-content-category",
+                    "#media-element"
                 ],
                 "if": {
                     "has": "#attr-media-controls",
@@ -1165,6 +1170,9 @@
                       "then": "#transparent"
                   }
                 }
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1369,6 +1377,12 @@
                     "#category-label",
                     "#the-label-element"
                 ]
+            },
+            "ContentModelPriority": {
+              "#category-label": 2,
+              "#the-label-element": 2,
+              "#phrasing-content-2": 1,
+              "#labeled-control": 1
             }
         }
     },
@@ -1408,6 +1422,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1432,7 +1449,23 @@
                     "#interactive-content-2",
                     "#attr-tabindex"
                 ]
+            },
+            "ContentModelPriority": {
+                "#interactive-content-2": 2,
+                "#attr-tabindex": 2,
+                "#phrasing-content-2": 1
             }
+        },
+        "warnings": {
+          "a": {
+            "messages": [
+              "Since the absence of an href for a link means that this is a placeholder for a link or a disabled link (which is activated only after authorization or any user action).",
+              "A link cannot be included in the button even without the href attribute, since it turns out to be semantically incorrect (because if we simply add an href, we will get a violation of the specification).",
+              "Using a link inside a button will also fail with ping attributes and so on, since it is recommended to omit their use without href attribute.",
+              "Links without href can be used in the menu to disable any item without using span (this is useful of course)."
+            ],
+            "can": false
+          }
         }
     },
     "select": {
