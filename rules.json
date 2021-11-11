@@ -558,6 +558,12 @@
                     "#the-a-element",
                     "#attr-tabindex"
                 ]
+            },
+            "ContentModelPriority": {
+              "#interactive-content-2": 2,
+              "#the-a-element": 2,
+              "#attr-tabindex": 2,
+              "#transparent": 1
             }
         }
     },
