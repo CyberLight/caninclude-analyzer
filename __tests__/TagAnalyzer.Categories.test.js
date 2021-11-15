@@ -381,9 +381,9 @@ describe('TagAnalyzer::Categories', () => {
   it.each`
         parameter                  | expected
         ${undefined}               | ${['#flow-content-2', '#phrasing-content-2',
-  '#embedded-content-category', '#palpable-content-2']}
+  '#embedded-content-category', '#palpable-content-2', '#media-element']}
         ${'#attr-media-controls'}  | ${['#interactive-content-2', '#flow-content-2', '#phrasing-content-2',
-  '#embedded-content-category', '#palpable-content-2']}
+  '#embedded-content-category', '#palpable-content-2', '#media-element']}
     `('Get categoties by $parameter for "video" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.video;
 
@@ -393,11 +393,16 @@ describe('TagAnalyzer::Categories', () => {
 
   it.each`
         parameter                  | expected
-        ${undefined}               | ${['#flow-content-2', '#phrasing-content-2', '#embedded-content-category']}
+        ${undefined}               | ${[
+  '#flow-content-2',
+  '#phrasing-content-2',
+  '#embedded-content-category',
+  '#media-element']}
         ${'#attr-media-controls'}  | ${['#interactive-content-2',
   '#palpable-content-2', '#flow-content-2',
   '#phrasing-content-2',
-  '#embedded-content-category']}
+  '#embedded-content-category',
+  '#media-element']}
     `('Get categoties by $parameter for "audio" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.audio;
 
