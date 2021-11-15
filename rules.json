@@ -7,6 +7,10 @@
                     "#the-head-element",
                     "#the-body-element"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-head-element": 1,
+              "#the-body-element": 1
             }
         }
     },
@@ -21,6 +25,11 @@
                         "#the-base-element"
                     ] }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-title-element": 2,
+              "#the-base-element": 2,
+              "#metadata-content-2": 1
             }
         }
     },
@@ -34,6 +43,9 @@
                     "not": "#inter-element-whitespace",
                     "then": "#text-content"
                 }
+            },
+            "ContentModelPriority": {
+              "#text-content": 1
             }
         }
     },
@@ -44,6 +56,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -60,6 +75,10 @@
                 }
             },
             "ContentModel": {
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1,
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -75,7 +94,12 @@
                     ]
                 }
             },
-            "ContentModel": {}
+            "ContentModel": {},
+            "ContentModelPriority": {
+              "#flow-content-2": 2,
+              "#phrasing-content-2": 2,
+              "#metadata-content-2": 1
+            }
         }
     },
     "style": {
@@ -85,6 +109,9 @@
             },
             "ContentModel": {
                 "default": "#text-content"
+            },
+            "ContentModelPriority": {
+              "#text-content": 1
             }
         }
     },
@@ -95,6 +122,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -109,6 +139,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -123,6 +156,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -137,6 +173,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -151,6 +190,9 @@
             },
             "ContentModel": {
                "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -165,6 +207,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -179,6 +224,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -193,6 +241,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -207,6 +258,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -221,6 +275,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -235,6 +292,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -260,6 +320,16 @@
                   ] },
                 { "optional": "#script-supporting-elements-2" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements": 2,
+              "#the-h1-element": 2,
+              "#the-h2-element": 2,
+              "#the-h3-element": 2,
+              "#the-h4-element": 2,
+              "#the-h5-element": 2,
+              "#the-h6-element": 2,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -277,6 +347,11 @@
                     "#the-header-element",
                     "#the-footer-element"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-header-element": 2,
+              "#the-footer-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -294,6 +369,11 @@
                     "#the-header-element",
                     "#the-footer-element"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-header-element": 2,
+              "#the-footer-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -314,6 +394,14 @@
                     "#the-footer-element",
                     "#the-address-element"
                 ]
+            },
+            "ContentModelPriority": {
+                "#heading-content-2": 2,
+                "#sectioning-content-2": 2,
+                "#the-header-element": 2,
+                "#the-footer-element": 2,
+                "#the-address-element": 2,
+                "#flow-content-2": 1
             }
         }
     },
@@ -327,6 +415,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -337,6 +428,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -350,6 +444,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -364,6 +461,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -381,6 +481,10 @@
                     "#the-li-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-li-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -398,6 +502,10 @@
                     "#the-li-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-li-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -415,6 +523,10 @@
                     "#the-li-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-li-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -423,6 +535,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -447,14 +562,20 @@
                     },
                     {
                         "oneOrMore": [
-                            "#the-dt-element",
-                            "#the-dd-element"
+                          "#the-dt-element",
+                          "#the-dd-element"
                         ]
                     },
                     {
                       "optional": "#script-supporting-elements-2"
                     }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-div-element": 2,
+              "#the-dt-element": 2,
+              "#the-dd-element": 2,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -469,6 +590,13 @@
                     "#sectioning-content-2",
                     "#heading-content-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-header-element": 2,
+              "#the-footer-element": 2,
+              "#sectioning-content-2": 2,
+              "#heading-content-2": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -477,6 +605,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -494,6 +625,10 @@
                 { "default": "#flow-content-2" },
                 { "onlyOne": "#the-figcaption-element" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-figcaption-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -502,6 +637,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -515,6 +653,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -535,6 +676,11 @@
                     ],
                     "else": "#flow-content-2"
                 }
+            },
+            "ContentModelPriority": {
+              "#the-dt-element": 2,
+              "#the-dd-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -578,6 +724,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -592,6 +741,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -606,6 +758,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -620,6 +775,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -634,6 +792,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -648,6 +809,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -663,6 +827,10 @@
             "ContentModel": {
                 "default": "#phrasing-content-2",
                 "butNo": "#the-dfn-element"
+            },
+            "ContentModelPriority": {
+              "#the-dfn-element": 2,
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -677,6 +845,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -702,6 +873,12 @@
                         ]
                     }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-ruby-element": 4,
+              "#phrasing-content-2": 1,
+              "#the-rp-element": 1,
+              "#the-rt-element": 1
             }
         }
     },
@@ -710,6 +887,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -718,6 +898,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#text-content"
+            },
+            "ContentModelPriority": {
+              "#text-content": 1
             }
         }
     },
@@ -732,6 +915,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -750,6 +936,10 @@
                     "then": "#phrasing-content-2",
                     "else": "#text-content"
                 }
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1,
+              "#text-content": 1
             }
         }
     },
@@ -764,6 +954,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -778,6 +971,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -792,6 +988,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -806,6 +1005,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -820,6 +1022,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -834,6 +1039,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -848,6 +1056,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -862,6 +1073,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -876,6 +1090,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -890,6 +1107,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -904,6 +1124,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -918,6 +1141,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -932,6 +1158,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -945,6 +1174,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -958,6 +1190,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -972,19 +1207,25 @@
             },
             "ContentModel": {
                 "default": "#transparent"
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
     "del": {
         "rules": {
             "Categories": {
-                "default": [
-                    "#flow-content-2",
-                    "#phrasing-content-2"
-                ]
+              "default": [
+                  "#flow-content-2",
+                  "#phrasing-content-2"
+              ]
             },
             "ContentModel": {
-                "default": "#transparent"
+              "default": "#transparent"
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1007,6 +1248,11 @@
                 },
                 { "optional": "#script-supporting-elements-2" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-source-element": 1,
+              "#the-img-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1015,6 +1261,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1035,6 +1284,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1051,6 +1303,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1067,6 +1322,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1087,6 +1345,9 @@
                     "zeroOrMore": "#the-param-element",
                     "then": "#transparent"
                 }
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1095,6 +1356,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1187,6 +1451,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1201,6 +1468,9 @@
             },
             "ContentModel": {
                 "default": "#transparent"
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1214,6 +1484,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1244,6 +1517,15 @@
                         { "oneOfChild": [ "#the-tr-element", "#the-tfoot-element", "#script-supporting-elements-2"] }
                     ]}
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-caption-element": 1,
+              "#the-colgroup-element": 1,
+              "#the-thead-element": 1,
+              "#the-tbody-element": 1,
+              "#the-tr-element": 1,
+              "#the-tfoot-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1255,6 +1537,10 @@
                 { "noChild": "#the-table-element" },
                 { "default": "#flow-content-2" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-table-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -1270,6 +1556,11 @@
                       "#the-template-element"
                     ]
                 }
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1,
+              "#the-col-element": 1,
+              "#the-template-element": 1
             }
         }
     },
@@ -1278,6 +1569,9 @@
             "Categories": {},
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1289,6 +1583,10 @@
                     "#the-tr-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-tr-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1300,6 +1598,10 @@
                     "#the-tr-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-tr-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1311,6 +1613,10 @@
                     "#the-tr-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-tr-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1323,6 +1629,11 @@
                     "#the-th-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-td-element": 1,
+              "#the-th-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1333,6 +1644,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -1347,6 +1661,13 @@
                     "#sectioning-content-2",
                     "#heading-content-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-header-element": 2,
+              "#the-footer-element": 2,
+              "#sectioning-content-2": 2,
+              "#heading-content-2": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -1361,6 +1682,10 @@
             "ContentModel": {
                 "default": "#flow-content-2",
                 "butNo": "#the-form-element"
+            },
+            "ContentModelPriority": {
+              "#the-form-element": 2,
+              "#flow-content-2": 1
             }
         }
     },
@@ -1496,6 +1821,11 @@
                     "#the-optgroup-element",
                     "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-option-element": 1,
+              "#the-optgroup-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1512,6 +1842,11 @@
                     { "optional": "#phrasing-content-2" },
                     { "zeroOrMore": [ "#the-option-element", "#script-supporting-elements-2" ] }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-option-element": 2,
+              "#script-supporting-elements-2": 2,
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -1520,9 +1855,13 @@
             "Categories": {},
             "ContentModel": {
                 "zeroOrMore": [
-                    "#the-option-element",
-                    "#script-supporting-elements-2"
+                  "#the-option-element",
+                  "#script-supporting-elements-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-option-element": 1,
+              "#script-supporting-elements-2": 1
             }
         }
     },
@@ -1567,6 +1906,10 @@
                         }
                     }
                 }
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1,
+              "#text-content": 1
             }
         }
     },
@@ -1588,6 +1931,9 @@
             },
             "ContentModel": {
                 "default": "#text-content"
+            },
+            "ContentModelPriority": {
+              "#text-content": 1
             }
         }
     },
@@ -1607,6 +1953,9 @@
             },
             "ContentModel": {
                 "default": "#phrasing-content-2"
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -1625,6 +1974,10 @@
                 { "default": "#phrasing-content-2" },
                 { "noChild": "#the-progress-element" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-progress-element": 2,
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -1643,6 +1996,10 @@
                 { "default": "#phrasing-content-2" },
                 { "noChild": "#the-meter-element" }
               ]
+            },
+            "ContentModelPriority": {
+              "#the-meter-element": 2,
+              "#phrasing-content-2": 1
             }
         }
     },
@@ -1663,6 +2020,10 @@
                     { "optional": "#the-legend-element" },
                     { "zeroOrMore": "#flow-content-2" }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-legend-element": 1,
+              "#flow-content-2": 1
             }
         }
     },
@@ -1674,6 +2035,10 @@
                     "#phrasing-content-2",
                     "#heading-content-2"
                 ]
+            },
+            "ContentModelPriority": {
+              "#phrasing-content-2": 1,
+              "#heading-content-2": 1
             }
         }
     },
@@ -1693,6 +2058,10 @@
                     { "zeroOrMore": "#flow-content-2" },
                     { "oneOfChild": ["#the-summary-element", "#flow-content-2"] }
                 ]
+            },
+            "ContentModelPriority": {
+              "#the-summary-element": 1,
+              "#flow-content-2": 1
             }
         }
     },
@@ -1706,6 +2075,9 @@
             },
             "ContentModel": {
                 "default": "#flow-content-2"
+            },
+            "ContentModelPriority": {
+              "#flow-content-2": 1
             }
         }
     },
@@ -1725,6 +2097,10 @@
                     "then": "#text-content-comment",
                     "else": ["#text-content-comment", "#text-content"]
                 }
+            },
+            "ContentModelPriority": {
+              "#text-content-comment": 1,
+              "#text-content": 1
             }
         }
     },
@@ -1757,6 +2133,12 @@
                         "then": "#transparent"
                     }
                 }
+            },
+            "ContentModelPriority": {
+              "#the-link-element": 2,
+              "#the-style-element": 2,
+              "#the-meta-element": 2,
+              "#transparent": 1
             }
         }
     },
@@ -1772,6 +2154,9 @@
             },
             "ContentModel": {
                 "default": "#concept-content-nothing"
+            },
+            "ContentModelPriority": {
+              "#concept-content-nothing": 1
             }
         }
     },
@@ -1785,6 +2170,9 @@
             },
             "ContentModel": {
                 "default": "#transparent"
+            },
+            "ContentModelPriority": {
+              "#transparent": 1
             }
         }
     },
@@ -1855,6 +2243,12 @@
                     }
                   }
                 }
+            },
+            "ContentModelPriority": {
+              "#the-img-element": 2,
+              "#the-input-element": 2,
+              "#the-select-element": 2,
+              "#transparent": 1
             }
         }
     }
