@@ -32,8 +32,9 @@ describe('TagAnalyzer::ContentModel', () => {
   });
 
   it.each`
-        child            |  parent            | expected
-        ${{name: 'img'}} |  ${{name: 'a'}}    | ${'unknown'}
+        child                                                        |  parent            | expected
+        ${{name: 'img'}}                                             |  ${{name: 'a'}}    | ${'unknown'}
+        ${{name: 'img', params: ['hasAttr:#attr-hyperlink-usemap']}} |  ${{name: 'a'}}    | ${false}
     `('Can include $child to $parent tag result: $expected', ({parent, child, expected}) => {
     expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
   });
