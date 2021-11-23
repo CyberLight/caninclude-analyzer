@@ -12,7 +12,8 @@
               "#the-head-element": 1,
               "#the-body-element": 1
             }
-        }
+        },
+        "params": {}
     },
     "head": {
         "rules": {
@@ -31,7 +32,8 @@
               "#the-base-element": 2,
               "#metadata-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "title": {
         "rules": {
@@ -47,7 +49,8 @@
             "ContentModelPriority": {
               "#text-content": 1
             }
-        }
+        },
+        "params": {}
     },
     "base": {
         "rules": {
@@ -60,7 +63,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "link": {
         "rules": {
@@ -80,6 +84,9 @@
               "#flow-content-2": 1,
               "#phrasing-content-2": 1
             }
+        },
+        "params": {
+            "Categories": ["#allowed-in-the-body"]
         }
     },
     "meta": {
@@ -100,6 +107,9 @@
               "#phrasing-content-2": 2,
               "#metadata-content-2": 1
             }
+        },
+        "params": {
+            "Categories": ["#names:-the-itemprop-attribute"]
         }
     },
     "style": {
@@ -113,7 +123,8 @@
             "ContentModelPriority": {
               "#text-content": 1
             }
-        }
+        },
+        "params": {}
     },
     "body": {
         "rules": {
@@ -126,7 +137,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "article": {
         "rules": {
@@ -143,7 +155,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "section": {
         "rules": {
@@ -160,7 +173,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "nav": {
         "rules": {
@@ -177,7 +191,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "aside": {
         "rules": {
@@ -194,7 +209,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h1": {
         "rules": {
@@ -211,7 +227,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h2": {
         "rules": {
@@ -228,7 +245,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h3": {
         "rules": {
@@ -245,7 +263,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h4": {
         "rules": {
@@ -262,7 +281,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h5": {
         "rules": {
@@ -279,7 +299,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "h6": {
         "rules": {
@@ -296,7 +317,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "hgroup": {
         "rules": {
@@ -331,7 +353,8 @@
               "#the-h6-element": 2,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "header": {
         "rules": {
@@ -353,7 +376,8 @@
               "#the-footer-element": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "footer": {
         "rules": {
@@ -375,7 +399,8 @@
               "#the-footer-element": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "address": {
         "rules": {
@@ -403,7 +428,8 @@
                 "#the-address-element": 2,
                 "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "p": {
         "rules": {
@@ -419,7 +445,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "hr": {
         "rules": {
@@ -432,7 +459,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "pre": {
         "rules": {
@@ -448,7 +476,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "blockquote": {
         "rules": {
@@ -465,7 +494,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "ol": {
         "rules": {
@@ -486,6 +516,9 @@
               "#the-li-element": 1,
               "#script-supporting-elements-2": 1
             }
+        },
+        "params": {
+            "Categories": ["#the-li-element"]
         }
     },
     "ul": {
@@ -507,6 +540,11 @@
               "#the-li-element": 1,
               "#script-supporting-elements-2": 1
             }
+        },
+        "params": {
+            "Categories": [
+                "#the-li-element"
+            ]
         }
     },
     "menu": {
@@ -528,6 +566,11 @@
               "#the-li-element": 1,
               "#script-supporting-elements-2": 1
             }
+        },
+        "params": {
+            "Categories": [
+                "#the-li-element"
+            ]
         }
     },
     "li": {
@@ -539,7 +582,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "dl": {
         "rules": {
@@ -577,6 +621,12 @@
               "#the-dd-element": 2,
               "#script-supporting-elements-2": 1
             }
+        },
+        "params": {
+            "Categories": [
+                "#the-dt-element",
+                "#the-dd-element"
+            ]
         }
     },
     "dt": {
@@ -598,7 +648,8 @@
               "#heading-content-2": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "dd": {
         "rules": {
@@ -609,7 +660,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "figure": {
         "rules": {
@@ -630,7 +682,8 @@
               "#the-figcaption-element": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "figcaption": {
         "rules": {
@@ -641,7 +694,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "main": {
         "rules": {
@@ -657,7 +711,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "div": {
         "rules": {
@@ -682,6 +737,9 @@
               "#the-dd-element": 2,
               "#flow-content-2": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#the-dl-element"]
         }
     },
     "a": {
@@ -711,6 +769,9 @@
               "#attr-tabindex": 2,
               "#transparent": 1
             }
+        },
+        "params": {
+            "Categories": ["#attr-hyperlink-href"]
         }
     },
     "em": {
@@ -728,7 +789,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "strong": {
         "rules": {
@@ -745,7 +807,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "small": {
         "rules": {
@@ -762,7 +825,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "s": {
         "rules": {
@@ -779,7 +843,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "cite": {
         "rules": {
@@ -796,7 +861,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "q": {
         "rules": {
@@ -813,7 +879,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "dfn": {
         "rules": {
@@ -832,7 +899,8 @@
               "#the-dfn-element": 2,
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "abbr": {
         "rules": {
@@ -849,7 +917,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "ruby": {
         "rules": {
@@ -880,7 +949,8 @@
               "#the-rp-element": 1,
               "#the-rt-element": 1
             }
-        }
+        },
+        "params": {}
     },
     "rt": {
         "rules": {
@@ -891,7 +961,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "rp": {
         "rules": {
@@ -902,7 +973,8 @@
             "ContentModelPriority": {
               "#text-content": 1
             }
-        }
+        },
+        "params": {}
     },
     "data": {
         "rules": {
@@ -919,7 +991,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "time": {
         "rules": {
@@ -941,6 +1014,9 @@
               "#phrasing-content-2": 1,
               "#text-content": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#attr-time-datetime"]
         }
     },
     "code": {
@@ -958,7 +1034,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "var": {
         "rules": {
@@ -975,7 +1052,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "samp": {
         "rules": {
@@ -992,7 +1070,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "kbd": {
         "rules": {
@@ -1009,7 +1088,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "sub": {
         "rules": {
@@ -1026,7 +1106,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "sup": {
         "rules": {
@@ -1043,7 +1124,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "i": {
         "rules": {
@@ -1060,7 +1142,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "b": {
         "rules": {
@@ -1077,7 +1160,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "u": {
         "rules": {
@@ -1094,7 +1178,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "mark": {
         "rules": {
@@ -1111,7 +1196,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "bdi": {
         "rules": {
@@ -1128,7 +1214,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "bdo": {
         "rules": {
@@ -1145,7 +1232,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "span": {
         "rules": {
@@ -1162,7 +1250,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "br": {
         "rules": {
@@ -1178,7 +1267,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "wbr": {
         "rules": {
@@ -1194,7 +1284,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "ins": {
         "rules": {
@@ -1211,7 +1302,8 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
-        }
+        },
+        "params": {}
     },
     "del": {
         "rules": {
@@ -1227,7 +1319,8 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
-        }
+        },
+        "params": {}
     },
     "picture": {
         "rules": {
@@ -1254,7 +1347,8 @@
               "#the-img-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "source": {
         "rules": {
@@ -1265,7 +1359,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "img": {
         "rules": {
@@ -1288,6 +1383,9 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
+        },
+        "params": {
+            "Categories": ["#attr-hyperlink-usemap"]
         }
     },
     "iframe": {
@@ -1307,7 +1405,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "embed": {
         "rules": {
@@ -1326,7 +1425,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "object": {
         "rules": {
@@ -1349,6 +1449,9 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#the-param-element"]
         }
     },
     "param": {
@@ -1360,7 +1463,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "video": {
         "rules": {
@@ -1401,6 +1505,10 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
+        },
+        "params": {
+            "Categories": ["#attr-media-controls"],
+            "ContentModel": ["#attr-media-src"]
         }
     },
     "audio": {
@@ -1444,6 +1552,10 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
+        },
+        "params": {
+            "Categories": ["#attr-media-controls"],
+            "ContentModel": ["#attr-media-src"]
         }
     },
     "track": {
@@ -1455,7 +1567,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "map": {
         "rules": {
@@ -1472,7 +1585,8 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
-        }
+        },
+        "params": {}
     },
     "area": {
         "rules": {
@@ -1488,7 +1602,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "table": {
         "rules": {
@@ -1527,7 +1642,8 @@
               "#the-tfoot-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "caption": {
         "rules": {
@@ -1542,7 +1658,8 @@
               "#the-table-element": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "colgroup": {
         "rules": {
@@ -1562,6 +1679,9 @@
               "#the-col-element": 1,
               "#the-template-element": 1
             }
+        },
+        "params": {
+            "ContentModel":["#attr-colgroup-span"]
         }
     },
     "col": {
@@ -1573,7 +1693,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "tbody": {
         "rules": {
@@ -1588,7 +1709,8 @@
               "#the-tr-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "thead": {
         "rules": {
@@ -1603,7 +1725,8 @@
               "#the-tr-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "tfoot": {
         "rules": {
@@ -1618,7 +1741,8 @@
               "#the-tr-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "tr": {
         "rules": {
@@ -1635,7 +1759,8 @@
               "#the-th-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "td": {
         "rules": {
@@ -1648,7 +1773,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "th": {
         "rules": {
@@ -1669,7 +1795,8 @@
               "#heading-content-2": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "form": {
         "rules": {
@@ -1687,7 +1814,8 @@
               "#the-form-element": 2,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "label": {
         "rules": {
@@ -1715,7 +1843,8 @@
               "#phrasing-content-2": 1,
               "#labeled-control": 1
             }
-        }
+        },
+        "params": {}
     },
     "input": {
         "rules": {
@@ -1757,6 +1886,9 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
+        },
+        "params": {
+            "Categories":["#hidden-state-(type=hidden)", "#attr-input-type"]
         }
     },
     "button": {
@@ -1787,6 +1919,7 @@
                 "#phrasing-content-2": 1
             }
         },
+        "params": {},
         "warnings": {
           "a": {
             "messages": [
@@ -1827,7 +1960,8 @@
               "#the-optgroup-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "datalist": {
         "rules": {
@@ -1848,7 +1982,8 @@
               "#script-supporting-elements-2": 2,
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "optgroup": {
         "rules": {
@@ -1863,7 +1998,8 @@
               "#the-option-element": 1,
               "#script-supporting-elements-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "option": {
         "rules": {
@@ -1911,6 +2047,9 @@
               "#concept-content-nothing": 1,
               "#text-content": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#attr-option-label", "#attr-option-value", "#the-datalist-element"]
         }
     },
     "textarea": {
@@ -1935,7 +2074,8 @@
             "ContentModelPriority": {
               "#text-content": 1
             }
-        }
+        },
+        "params": {}
     },
     "output": {
         "rules": {
@@ -1957,7 +2097,8 @@
             "ContentModelPriority": {
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "progress": {
         "rules": {
@@ -1979,7 +2120,8 @@
               "#the-progress-element": 2,
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "meter": {
         "rules": {
@@ -2001,7 +2143,8 @@
               "#the-meter-element": 2,
               "#phrasing-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "fieldset": {
         "rules": {
@@ -2025,7 +2168,8 @@
               "#the-legend-element": 1,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "legend": {
         "rules": {
@@ -2040,7 +2184,8 @@
               "#phrasing-content-2": 1,
               "#heading-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "details": {
         "rules": {
@@ -2063,7 +2208,8 @@
               "#the-summary-element": 1,
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "dialog": {
         "rules": {
@@ -2079,7 +2225,8 @@
             "ContentModelPriority": {
               "#flow-content-2": 1
             }
-        }
+        },
+        "params": {}
     },
     "script": {
         "rules": {
@@ -2102,6 +2249,9 @@
               "#text-content-comment": 1,
               "#text-content": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#attr-script-src"]
         }
     },
     "noscript": {
@@ -2140,6 +2290,9 @@
               "#the-meta-element": 2,
               "#transparent": 1
             }
+        },
+        "params": {
+            "ContentModel": ["#concept-n-noscript", "#the-head-element", "#the-noscript-element"]
         }
     },
     "template": {
@@ -2158,7 +2311,8 @@
             "ContentModelPriority": {
               "#concept-content-nothing": 1
             }
-        }
+        },
+        "params": {}
     },
     "slot": {
         "rules": {
@@ -2174,7 +2328,8 @@
             "ContentModelPriority": {
               "#transparent": 1
             }
-        }
+        },
+        "params": {}
     },
     "canvas": {
         "rules": {
@@ -2250,6 +2405,7 @@
               "#the-select-element": 2,
               "#transparent": 1
             }
-        }
+        },
+        "params": {}
     }
 }
