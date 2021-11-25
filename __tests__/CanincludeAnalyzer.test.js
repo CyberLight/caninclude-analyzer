@@ -1,12 +1,8 @@
 /* eslint-disable max-len */
-const {CanincludeAnalyzer} = require('../index.js');
-const analyzer = new CanincludeAnalyzer();
+const {CanincludeAnalyzer, rules} = require('../index.js');
+const analyzer = new CanincludeAnalyzer(rules);
 
 describe('TagAnalyzer::ContentModel', () => {
-  beforeAll(() => {
-    return analyzer.load();
-  });
-
   it.each`
         child              |  parent                | expected
         ${{name: 'audio'}} |  ${{name: 'video'}}    | ${false}

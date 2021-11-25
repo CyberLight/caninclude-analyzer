@@ -1,11 +1,9 @@
 /* eslint-disable require-jsdoc */
-const {readFile} = require('fs');
-const path = require('path');
+const rules = require('./rules.json');
 
 const TagAnalyzerUnknown = 'unknown';
 const TagAnalyzerTransparent = '#transparent';
 const TagAnalyzerSkipResult = 'skip';
-const DefaultRulesPath = path.join(process.cwd(), 'rules.json');
 
 class TagAnalyzer {
   constructor(tagMetadata) {
@@ -459,38 +457,11 @@ class TagAnalyzer {
 }
 
 class CanincludeAnalyzer {
-  constructor(rulesPath = DefaultRulesPath) {
-    this.controller = new AbortController();
-    this.signal = this.controller.signal;
-    this.loading = false;
-    this.rules = null;
-    this.loaded = false;
-    this.rulesPath = rulesPath;
-  }
-
-  async load() {
-    return new Promise((resolve, reject) => {
-      if (this.loading) {
-        this.controller.abort();
-        this.controller = new AbortController();
-        this.signal = controller.signal;
-      }
-      this.loading = true;
-      const {signal} = this;
-      readFile(this.rulesPath, {signal}, (err, buf) => {
-        if (err) return reject(err);
-        resolve(JSON.parse(buf));
-      });
-    }).then((rules) => {
-      this.rules = rules;
-      this.loaded = true;
-    }).catch(() => {
-      this.loaded = false;
-    });
+  constructor(rules) {
+    this.rules = rules;
   }
 
   analyze(childTagInfo, parentTagInfo) {
-    if (!this.loaded) throw new Error('[CanincludeAnalyzer] Rules were not loaded.');
     const childMeta = this.rules[childTagInfo.name];
     const parentMeta = this.rules[parentTagInfo.name];
     const childTag = new TagAnalyzer(childMeta);
@@ -523,7 +494,7 @@ class CanincludeAnalyzer {
 }
 
 if (require.main === module) {
-  const analyzer = new CanincludeAnalyzer();
+  const analyzer = new CanincludeAnalyzer(rules);
   analyzer.load().then((json) => {
     console.warn('json: ', json);
   });
@@ -531,6 +502,7 @@ if (require.main === module) {
   module.exports = {
     TagAnalyzer,
     CanincludeAnalyzer,
+    rules
   };
 }
 
