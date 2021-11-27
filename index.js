@@ -461,6 +461,16 @@ class CanincludeAnalyzer {
     this.rules = rules;
   }
 
+  mapCanInlcudeResult(resultAsIs) {
+    if (resultAsIs === 'false') return false;
+    if (resultAsIs === 'true') return true;
+    return resultAsIs;
+  }
+
+  mapResult(result) {
+    return result.sort((l, r) => r[1].priority - l[1].priority);
+  }
+
   analyze(childTagInfo, parentTagInfo) {
     const childMeta = this.rules[childTagInfo.name];
     const parentMeta = this.rules[parentTagInfo.name];
@@ -477,7 +487,7 @@ class CanincludeAnalyzer {
     return result;
   }
 
-  canInclude(childTagInfo, parentTagInfo) {
+  canInclude(childTagInfo, parentTagInfo, extended=false) {
     const result = this.analyze(childTagInfo, parentTagInfo);
     if (!result.length) return false;
     const prioritySums = result.reduce((sums, [, {can, priority}]) => {
@@ -487,9 +497,8 @@ class CanincludeAnalyzer {
     }, {});
     const sortedByPriority = Object.entries(prioritySums).sort((l, r) => r[1] - l[1]);
     const maxPriorityResult = sortedByPriority[0][0];
-    if (maxPriorityResult === 'false') return false;
-    if (maxPriorityResult === 'true') return true;
-    return maxPriorityResult;
+    const mappedResult = this.mapCanInlcudeResult(maxPriorityResult);
+    return extended ? {can: mappedResult, params: this.mapResult(result)} : mappedResult;
   }
 }
 
@@ -502,7 +511,7 @@ if (require.main === module) {
   module.exports = {
     TagAnalyzer,
     CanincludeAnalyzer,
-    rules
+    rules,
   };
 }
 
