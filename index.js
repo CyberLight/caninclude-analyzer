@@ -148,7 +148,7 @@ class TagAnalyzer {
       if (item.zeroOrMore) return checks.map((text) => this.hasZeroOrMore(item.zeroOrMore, text));
       if (item.onlyOne) return checks.map((text) => this.hasOnlyOne(item.onlyOne, text));
       if (item.has) return checks.map((text) => this.has(item.has, condition || text));
-      if (item.notHas) return checks.map((text) => this.notHas(item.notHas, text));
+      if (item.notHas) return checks.map((text) => this.notHas(item.notHas, condition || text));
       if (item.noChild) return checks.map((text) => this.hasNoChild(item.noChild, condition || text));
       if (item.oneOfChild) return checks.map((text) => this.hasOneOfChild(item.oneOfChild, text));
       if (item.default) return checks.map((text) => this.hasDefaultCond(item.default, text));
@@ -218,6 +218,11 @@ class TagAnalyzer {
   ifCond(o, {condition, text} = {}) {
     if (o.childOf) {
       return this.childOf(o, {condition, text});
+    }
+    if (o.notHas) {
+      if (this.notHas(o.notHas, condition || text)) {
+        return this.ifthen(o.then);
+      }
     }
     if (o.is) {
       if (o.is === text) {
@@ -315,7 +320,13 @@ class TagAnalyzer {
 
   notHas(o, text) {
     if (Array.isArray(o)) {
-      return !new Set(o).has(this.normalize(text));
+      if (Array.isArray(text)) {
+        return text.every((t) => !new Set(o).has(this.normalize(t)));
+      }
+      return !new Set(o).has(text);
+    }
+    if (Array.isArray(text)) {
+      return text.every((t) => !new Set([o]).has(this.normalize(t)));
     }
     return o !== this.normalize(text);
   }
