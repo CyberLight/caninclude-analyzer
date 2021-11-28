@@ -497,9 +497,10 @@ class CanincludeAnalyzer {
     }, []);
     return result;
   }
-  getWarnings(parentTagInfo) {
-    const childTagName = parentTagInfo.name;
-    const {warnings} = this.rules[childTagName];
+  getWarnings(childTagInfo, parentTagInfo) {
+    const childTagName = childTagInfo.name;
+    const parentTagName = parentTagInfo.name;
+    const {warnings} = this.rules[parentTagName];
     if (warnings && warnings[childTagName]) {
       return warnings[childTagName];
     }
@@ -518,7 +519,7 @@ class CanincludeAnalyzer {
     const mappedResult = this.mapCanInlcudeResult(maxPriorityResult);
     return extended ? {
       can: mappedResult,
-      alternative: this.getWarnings(parentTagInfo),
+      alternative: this.getWarnings(childTagInfo, parentTagInfo),
       params: this.mapResult(result),
     } : mappedResult;
   }
