@@ -1955,12 +1955,13 @@
         "params": {},
         "warnings": {
           "a": {
-            "messages": [
+            "message": [
               "Since the absence of an href for a link means that this is a placeholder for a link or a disabled link (which is activated only after authorization or any user action).",
               "A link cannot be included in the button even without the href attribute, since it turns out to be semantically incorrect (because if we simply add an href, we will get a violation of the specification).",
               "Using a link inside a button will also fail with ping attributes and so on, since it is recommended to omit their use without href attribute.",
               "Links without href can be used in the menu to disable any item without using span (this is useful of course)."
             ],
+            "type": "warning",
             "can": false
           }
         }
