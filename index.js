@@ -497,7 +497,14 @@ class CanincludeAnalyzer {
     }, []);
     return result;
   }
-
+  getWarnings(parentTagInfo) {
+    const childTagName = parentTagInfo.name;
+    const {warnings} = this.rules[childTagName];
+    if (warnings && warnings[childTagName]) {
+      return warnings[childTagName];
+    }
+    return null;
+  }
   canInclude(childTagInfo, parentTagInfo, extended=false) {
     const result = this.analyze(childTagInfo, parentTagInfo);
     if (!result.length) return false;
@@ -509,7 +516,11 @@ class CanincludeAnalyzer {
     const sortedByPriority = Object.entries(prioritySums).sort((l, r) => r[1] - l[1]);
     const maxPriorityResult = sortedByPriority[0][0];
     const mappedResult = this.mapCanInlcudeResult(maxPriorityResult);
-    return extended ? {can: mappedResult, params: this.mapResult(result)} : mappedResult;
+    return extended ? {
+      can: mappedResult,
+      alternative: this.getWarnings(parentTagInfo),
+      params: this.mapResult(result),
+    } : mappedResult;
   }
 }
 
