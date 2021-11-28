@@ -1828,14 +1828,47 @@
                 ]
             },
             "ContentModel": {
-                "default": [
+                "if": {
+                  "or": [
+                    {"and":[
+                      {"notHas": "#hidden-state-(type=hidden)"},
+                      {"has": "#attr-input-type"}
+                    ]},
+                    {"and": [
+                      {"is": "#the-input-element"},
+                      {"notHas": "#hidden-state-(type=hidden)"}
+                    ]}
+                  ],
+                  "then": [
+                    "#the-input-element",
                     "#phrasing-content-2",
-                    "#labeled-control"
-                ],
-                "butNo": [
-                    "#category-label",
-                    "#the-label-element"
-                ]
+                    "#labeled-control",
+                    "#the-button-element",
+                    "#the-meter-element",
+                    "#the-output-element",
+                    "#the-progress-element",
+                    "#the-select-element",
+                    "#the-textarea-element"
+                  ],
+                  "elseif": {
+                    "notHas": [
+                      "#hidden-state-(type=hidden)",
+                      "#attr-input-type",
+                      "#category-label",
+                      "#the-label-element"
+                    ],
+                    "then": [
+                        "#phrasing-content-2",
+                        "#labeled-control",
+                        "#the-button-element",
+                        "#the-meter-element",
+                        "#the-output-element",
+                        "#the-progress-element",
+                        "#the-select-element",
+                        "#the-textarea-element"
+                    ]
+                  }
+                }
             },
             "ContentModelPriority": {
               "#category-label": 2,
