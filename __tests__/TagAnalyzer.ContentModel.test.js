@@ -641,16 +641,20 @@ describe('TagAnalyzer::ContentModel', () => {
   });
 
   it.each`
-        parameter                                                 | expected
-        ${undefined}                                              | ${false}
-        ${'#phrasing-content-2'}                                  | ${true}
-        ${'#labeled-control'}                                     | ${true}
-        ${'#category-label'}                                      | ${false}
-        ${'#the-label-element'}                                   | ${false}
-        ${['hasChild:#category-label', '#phrasing-content-2']}    | ${false}
-        ${['hasChild:#the-label-element', '#phrasing-content-2']} | ${false}
-        ${['hasChild:#category-label', '#labeled-control']}       | ${false}
-        ${['hasChild:#the-label-element', '#labeled-control']}    | ${false}
+        parameter                                                                                     | expected
+        ${undefined}                                                                                  | ${false}
+        ${'#phrasing-content-2'}                                                                      | ${true}
+        ${'#labeled-control'}                                                                         | ${true}
+        ${'#category-label'}                                                                          | ${false}
+        ${'#the-label-element'}                                                                       | ${false}
+        ${['hasChild:#category-label', '#phrasing-content-2']}                                        | ${false}
+        ${['hasChild:#the-label-element', '#phrasing-content-2']}                                     | ${false}
+        ${['hasChild:#category-label', '#labeled-control']}                                           | ${false}
+        ${['hasChild:#the-label-element', '#labeled-control']}                                        | ${false}
+        ${['hasAttr:#hidden-state-(type=hidden)', '#the-input-element']}                              | ${false}
+        ${['hasAttr:#attr-input-type', '#the-input-element']}                                         | ${true}
+        ${['hasAttr:#attr-input-type', 'hasAttr:#hidden-state-(type=hidden)', '#the-input-element']}  | ${false}
+        ${'#the-input-element'}                                                                       | ${true}
     `('Can include $parameter to "label" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.label;
 
