@@ -29,7 +29,7 @@ describe('TagAnalyzer::ContentModel', () => {
 
   it.each`
         child                                                    | parent              | expected
-        ${{name: 'a', params: ['hasAttr:#attr-hyperlink-href']}} | ${{name: 'button'}} | ${{can: false, params: [
+        ${{name: 'a', params: ['hasAttr:#attr-hyperlink-href']}} | ${{name: 'button'}} | ${{'alternative': null, 'can': false, 'params': [
   ['#interactive-content-2', {'can': false, 'priority': 2}],
   ['#phrasing-content-2', {'can': true, 'priority': 1}],
   ['#flow-content-2', {'can': false, 'priority': 0}],
