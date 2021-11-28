@@ -516,12 +516,13 @@ class CanincludeAnalyzer {
     }, {});
     const sortedByPriority = Object.entries(prioritySums).sort((l, r) => r[1] - l[1]);
     const maxPriorityResult = sortedByPriority[0][0];
-    const mappedResult = this.mapCanInlcudeResult(maxPriorityResult);
+    const mappedCan = this.mapCanInlcudeResult(maxPriorityResult);
+    const alternative = this.getWarnings(childTagInfo, parentTagInfo);
     return extended ? {
-      can: mappedResult,
-      alternative: this.getWarnings(childTagInfo, parentTagInfo),
+      can: mappedCan,
+      alternative: alternative && mappedCan !== alternative.can ? alternative : null,
       params: this.mapResult(result),
-    } : mappedResult;
+    } : mappedCan;
   }
 }
 
