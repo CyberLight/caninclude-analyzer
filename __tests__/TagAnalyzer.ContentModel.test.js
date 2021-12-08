@@ -655,6 +655,8 @@ describe('TagAnalyzer::ContentModel', () => {
         ${['hasAttr:#attr-input-type', '#the-input-element']}                                         | ${true}
         ${['hasAttr:#attr-input-type', 'hasAttr:#hidden-state-(type=hidden)', '#the-input-element']}  | ${false}
         ${'#the-input-element'}                                                                       | ${true}
+        ${'#the-select-element'}                                                                      | ${true}
+        ${'#the-textarea-element'}                                                                    | ${true}
     `('Can include $parameter to "label" tag result: $expected', ({parameter, expected}) => {
     const tag = rules.label;
 
