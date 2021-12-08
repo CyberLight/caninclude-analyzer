@@ -1871,6 +1871,12 @@
                 }
             },
             "ContentModelPriority": {
+              "#the-button-element": 5,
+              "#the-meter-element": 5,
+              "#the-output-element": 5,
+              "#the-progress-element": 5,
+              "#the-select-element": 5,
+              "#the-textarea-element": 5,
               "#category-label": 2,
               "#the-label-element": 2,
               "#phrasing-content-2": 1,
