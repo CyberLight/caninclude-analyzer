@@ -924,4 +924,16 @@ describe('TagAnalyzer::ContentModel', () => {
     expect(analyzer.canInclude(parameter)).toStrictEqual(expected);
   });
   /* eslint-enable max-len */
+
+  it.each`
+        parameter                                                  | expected
+        ${undefined}                                               | ${false}
+        ${'#other-content'}                                        | ${false}
+        ${'#phrasing-content-2'}                                   | ${true}
+        ${'#heading-content-2'}                                    | ${true}
+    `('Can include $parameter to "summary" tag result: $expected', ({parameter, expected}) => {
+    const tag = rules.summary;
+    const analyzer = new TagAnalyzer(tag);
+    expect(analyzer.canInclude(parameter)).toStrictEqual(expected);
+  });
 });

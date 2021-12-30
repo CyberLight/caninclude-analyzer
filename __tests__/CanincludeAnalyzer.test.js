@@ -46,5 +46,12 @@ describe('TagAnalyzer::ContentModel', () => {
     `('Can include $child to $parent tag result: $expected', ({parent, child, expected}) => {
     expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
   });
+
+  it.each`
+        child                |  parent                 | expected
+        ${{name: 'summary'}} |  ${{name: 'details'}}    | ${true}
+    `('Can include $child to $parent tag result: $expected', ({parent, child, expected}) => {
+    expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
+  });
 });
 

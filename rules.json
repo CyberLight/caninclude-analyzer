@@ -2251,6 +2251,19 @@
         },
         "params": {}
     },
+    "summary": {
+        "rules": {
+            "Categories": {},
+            "ContentModel": {
+                "default": ["#phrasing-content-2", "#heading-content-2"]
+            },
+            "ContentModelPriority": {
+                "#phrasing-content-2": 2,
+                "#heading-content-2": 1
+            }
+        },
+        "params": {}
+    },
     "dialog": {
         "rules": {
             "Categories": {
