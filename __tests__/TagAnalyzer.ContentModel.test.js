@@ -820,6 +820,8 @@ describe('TagAnalyzer::ContentModel', () => {
         ${'#the-summary-element'}                                    | ${true}
         ${['hasChild:#the-summary-element', '#flow-content-2']}      | ${true}
         ${['hasChild:#the-summary-element', '#other-content']}       | ${false}
+        ${['hasChild:#the-summary-element', '#the-div-element']}     | ${false}
+        ${['hasChild:#the-summary-element', '#the-legend-element']}  | ${false}
         ${undefined}                                                 | ${false}
         ${'#other-content'}                                          | ${false}
     `('Can include $parameter to "details" tag result: $expected', ({parameter, expected}) => {

@@ -2239,8 +2239,10 @@
             },
             "ContentModel": {
                 "and": [
-                    { "has": "#the-summary-element" },
-                    { "zeroOrMore": "#flow-content-2" },
+                    { "or": [
+                        { "has": "#the-summary-element" },
+                        { "zeroOrMore": "#flow-content-2" }
+                    ]},
                     { "oneOfChild": ["#the-summary-element", "#flow-content-2"] }
                 ]
             },

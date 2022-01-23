@@ -49,6 +49,10 @@ describe('TagAnalyzer::ContentModel', () => {
 
   it.each`
         child                |  parent                 | expected
+        ${{name: 'div'}}     |  ${{name: 'details'}}    | ${true}
+        ${{name: 'span'}}     |  ${{name: 'details'}}    | ${true}
+        ${{name: 'rt'}}      |  ${{name: 'details'}}    | ${false}
+        ${{name: 'legend'}}  |  ${{name: 'details'}}    | ${false}
         ${{name: 'summary'}} |  ${{name: 'details'}}    | ${true}
     `('Can include $child to $parent tag result: $expected', ({parent, child, expected}) => {
     expect(analyzer.canInclude(child, parent)).toStrictEqual(expected);
